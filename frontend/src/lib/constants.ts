@@ -39,9 +39,30 @@ export const SABA_TOKEN_ABI = [
   {
     "inputs": [
       {"internalType": "address", "name": "to", "type": "address"},
-      {"internalType": "uint256", "name": "amount", "type": "uint256"}
+      {"internalType": "uint256", "name": "value", "type": "uint256"}
     ],
     "name": "transfer",
+    "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "address", "name": "spender", "type": "address"},
+      {"internalType": "uint256", "name": "value", "type": "uint256"}
+    ],
+    "name": "approve",
+    "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "address", "name": "from", "type": "address"},
+      {"internalType": "address", "name": "to", "type": "address"},
+      {"internalType": "uint256", "name": "value", "type": "uint256"}
+    ],
+    "name": "transferFrom",
     "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -54,6 +75,16 @@ export const SABA_TOKEN_ABI = [
       {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}
     ],
     "name": "Transfer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "address", "name": "owner", "type": "address"},
+      {"indexed": true, "internalType": "address", "name": "spender", "type": "address"},
+      {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}
+    ],
+    "name": "Approval",
     "type": "event"
   }
 ] as const

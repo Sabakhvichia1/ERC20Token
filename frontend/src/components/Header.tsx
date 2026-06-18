@@ -4,12 +4,17 @@ import { WalletButton } from './WalletButton'
 
 export function Header() {
   return (
-    <header className="bg-gradient-to-r from-slate-900/80 to-purple-900/80 backdrop-blur-lg border-b border-purple-500/20 sticky top-0 z-50 animate-fadeIn">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text animate-pulse-slow">
-            Saba Token Platform
-          </h1>
+    <header className="glass sticky top-0 z-50 border-b border-white/10">
+      <div className="container mx-auto px-6 py-5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/20">
+              ST
+            </div>
+            <h1 className="text-xl font-bold">
+              ERC-20 Token Platform
+            </h1>
+          </div>
           <WalletButton />
         </div>
       </div>

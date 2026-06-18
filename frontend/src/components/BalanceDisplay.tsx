@@ -1,13 +1,16 @@
 'use client'
 
+import { useState } from 'react'
 import { useAccount, useReadContract, useBlockNumber } from 'wagmi'
 import { SABA_TOKEN_ADDRESS, SABA_TOKEN_ABI, TOKEN_SYMBOL } from '@/lib/constants'
 import { formatUnits } from 'viem'
 import { useEffect } from 'react'
+import { SendTokenModal } from './SendTokenModal'
 
 export function BalanceDisplay() {
   const { address, isConnected } = useAccount()
   const { data: blockNumber } = useBlockNumber({ watch: true })
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { data: balance, isLoading, isError, refetch } = useReadContract({
     address: SABA_TOKEN_ADDRESS,
@@ -19,7 +22,6 @@ export function BalanceDisplay() {
     },
   })
 
-  // Refetch balance when new block is mined
   useEffect(() => {
     if (address && blockNumber) {
       refetch()
@@ -31,39 +33,57 @@ export function BalanceDisplay() {
     const num = parseFloat(formatted)
     return num.toLocaleString('en-US', {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 4,
+      maximumFractionDigits: 2,
     })
   }
 
   if (!isConnected) {
     return (
-      <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-purple-500/20 animate-fadeIn">
-        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text">Your Balance</h2>
-        <p className="text-5xl font-bold text-gray-400/50 animate-pulse-slow">0 {TOKEN_SYMBOL}</p>
-        <p className="text-sm text-blue-300/60 mt-3">Connect wallet to view balance</p>
+      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+          Your Balance
+        </h2>
+        <p className="text-6xl font-bold text-gray-500/30 mb-6">0.00 {TOKEN_SYMBOL}</p>
+        <p className="text-sm text-gray-400 mb-6">Connect wallet to view balance</p>
+        <div className="space-y-3">
+          <button
+            disabled
+            className="w-full px-6 py-3 glass border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-medium"
+          >
+            Send Tokens
+          </button>
+          <button
+            disabled
+            className="w-full px-6 py-3 glass border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-medium"
+          >
+            Receive
+          </button>
+        </div>
       </div>
     )
   }
 
   if (SABA_TOKEN_ADDRESS === '0x0000000000000000000000000000000000000000') {
     return (
-      <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-purple-500/20 animate-fadeIn">
-        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text">Your Balance</h2>
+      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+          Your Balance
+        </h2>
         <p className="text-yellow-400 mb-2">⚠️ Contract not configured</p>
-        <p className="text-sm text-gray-300">
-          Please set NEXT_PUBLIC_CONTRACT_ADDRESS in .env.local
-        </p>
+        <p className="text-sm text-gray-300">Please set contract address in .env.local</p>
       </div>
     )
   }
 
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-purple-500/20 animate-fadeIn">
-        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text">Your Balance</h2>
-        <div className="flex items-center gap-3">
-          <div className="animate-spin h-6 w-6 border-3 border-purple-400 border-t-transparent rounded-full"></div>
-          <p className="text-lg text-blue-300">Loading balance...</p>
+      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+          Your Balance
+        </h2>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-8 h-8 border-3 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-lg text-gray-300">Loading balance...</p>
         </div>
       </div>
     )
@@ -71,15 +91,15 @@ export function BalanceDisplay() {
 
   if (isError) {
     return (
-      <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-purple-500/20 animate-fadeIn">
-        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text">Your Balance</h2>
+      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+          Your Balance
+        </h2>
         <p className="text-red-400 mb-2">Failed to load balance</p>
-        <p className="text-sm text-gray-300 mb-4">
-          Please check your connection and network settings
-        </p>
+        <p className="text-sm text-gray-300 mb-4">Check your connection and network</p>
         <button
           onClick={() => refetch()}
-          className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50"
+          className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold"
         >
           Retry
         </button>
@@ -87,19 +107,49 @@ export function BalanceDisplay() {
     )
   }
 
+  const formattedBalance = balance !== undefined ? formatBalance(balance) : '0.00'
+
   return (
-    <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-lg p-6 rounded-2xl shadow-2xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-500 animate-fadeIn hover:transform hover:scale-[1.02]">
-      <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-300 to-purple-300 text-transparent bg-clip-text">Your Balance</h2>
-      <div className="relative">
-        <p className="text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text animate-pulse-slow">
-          {balance !== undefined ? formatBalance(balance) : '0'} {TOKEN_SYMBOL}
-        </p>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-2xl -z-10"></div>
+    <>
+      <div className="gradient-border rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-500 animate-slideUp" style={{ animationDelay: '0.1s' }}>
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+          Your Balance & Actions
+        </h2>
+        
+        <div className="mb-6">
+          <div className="relative inline-block">
+            <p className="text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-transparent bg-clip-text mb-2 animate-glow">
+              {formattedBalance} {TOKEN_SYMBOL}
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-2 text-sm">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-gray-400">Live updates</span>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50"
+          >
+            Send Tokens
+          </button>
+          
+          <button
+            className="w-full px-6 py-3 glass border border-purple-400/50 hover:bg-purple-500/10 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-medium"
+          >
+            Receive
+          </button>
+        </div>
       </div>
-      <p className="text-xs text-blue-300/60 mt-3 flex items-center gap-2">
-        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-        Updates automatically on new blocks
-      </p>
-    </div>
+
+      <SendTokenModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        maxBalance={formattedBalance}
+      />
+    </>
   )
 }
