@@ -16,24 +16,29 @@ export function TokenInfo() {
 
   return (
     <>
-      <div className="gradient-border rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-500 animate-slideUp">
-        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+      <div className="glass-card relative gradient-border-top">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           {TOKEN_NAME}
         </h2>
         
-        <div className="space-y-5">
+        <div className="space-y-6">
           {/* Symbol */}
           <div>
-            <p className="text-sm text-gray-400 mb-1">Symbol</p>
-            <p className="text-2xl font-bold text-white">{TOKEN_SYMBOL}</p>
+            <p className="text-xs uppercase text-muted mb-2 font-medium tracking-wider">Symbol</p>
+            <div className="flex items-center gap-2">
+              <p className="text-2xl font-bold text-cyan-400">{TOKEN_SYMBOL}</p>
+              <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 text-sm font-bold">
+                {TOKEN_SYMBOL}
+              </div>
+            </div>
           </div>
 
           {/* Contract Address */}
           <div>
-            <p className="text-sm text-gray-400 mb-2">Contract Address</p>
+            <p className="text-xs uppercase text-muted mb-2 font-medium tracking-wider">Contract Address</p>
             {isConfigured ? (
-              <div className="glass p-3 rounded-lg flex items-center justify-between gap-2 group">
-                <span className="font-mono text-xs text-cyan-300 break-all flex-1">
+              <div className="input-dark font-mono flex items-center justify-between gap-2 group">
+                <span className="text-sm text-white break-all flex-1">
                   {SABA_TOKEN_ADDRESS}
                 </span>
                 <button
@@ -47,17 +52,8 @@ export function TokenInfo() {
                 </button>
               </div>
             ) : (
-              <p className="text-yellow-400 text-sm">Not configured</p>
+              <p className="text-orange-red text-sm">Not configured</p>
             )}
-          </div>
-
-          {/* Description */}
-          <div>
-            <p className="text-sm text-gray-400 mb-2">Description</p>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              A custom ERC-20 token deployed on the Sepolia testnet with a fixed supply of 14 tokens. 
-              Built using OpenZeppelin's secure and audited contracts.
-            </p>
           </div>
 
           {/* Etherscan Link */}
@@ -66,14 +62,23 @@ export function TokenInfo() {
               href={etherscanUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 glass border border-cyan-400/50 hover:bg-cyan-500/10 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-medium group"
+              className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors group"
             >
-              <span>View on Etherscan</span>
-              <svg className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="text-sm font-medium">View on Etherscan</span>
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
           )}
+
+          {/* Description */}
+          <div>
+            <p className="text-xs uppercase text-muted mb-2 font-medium tracking-wider">About</p>
+            <p className="text-base text-secondary leading-relaxed">
+              A custom ERC-20 token deployed on the Sepolia testnet with a fixed supply of 14 tokens. 
+              Built using OpenZeppelin's secure and audited smart contracts.
+            </p>
+          </div>
         </div>
       </div>
 

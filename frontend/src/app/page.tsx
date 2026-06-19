@@ -8,20 +8,24 @@ export default function Home() {
       <Header />
       
       <main className="container mx-auto px-6">
-        {/* Hero Section - Much more spacious */}
-        <div className="text-center py-24 animate-fadeIn">
-          <h2 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-green-600 via-green-500 to-green-400 text-transparent bg-clip-text mb-8 leading-tight">
+        {/* Hero Section - Premium Web3 Style */}
+        <div className="text-center py-24 animate-fadeInUp">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold gradient-text mb-8 leading-tight">
             Saba Custom Token
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
             Connect your wallet to interact with SCT tokens on the Sepolia testnet
           </p>
         </div>
 
-        {/* Content Grid - More spacing */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24 max-w-7xl mx-auto">
-          <TokenInfo />
-          <BalanceDisplay />
+        {/* Content Grid - Premium Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24 max-w-7xl mx-auto">
+          <div className="animate-fadeInUp">
+            <TokenInfo />
+          </div>
+          <div className="animate-fadeInUp delay-100">
+            <BalanceDisplay />
+          </div>
         </div>
       </main>
     </div>

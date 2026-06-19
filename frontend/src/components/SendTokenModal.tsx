@@ -66,21 +66,21 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
 
   if (isSuccess) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-overlayFadeIn">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeIn">
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={handleClose}></div>
-        <div className="gradient-border rounded-2xl p-8 max-w-md w-full z-10 animate-modalSlideUp text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+        <div className="glass-card relative gradient-border-top max-w-md w-full z-10 animate-modalSlideUp text-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-green-500/50">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+          <h3 className="text-3xl font-bold mb-2 gradient-text">
             Transaction Sent!
           </h3>
-          <p className="text-gray-300 mb-6">Your tokens are being transferred</p>
+          <p className="text-secondary mb-8">Your tokens are being transferred</p>
           <button
             onClick={handleClose}
-            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold"
+            className="btn-primary w-full"
           >
             Done
           </button>
@@ -90,18 +90,28 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-overlayFadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeIn">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={handleClose}></div>
       
-      <div className="gradient-border rounded-2xl p-6 max-w-md w-full z-10 animate-modalSlideUp">
-        <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
-          Send SCT Tokens
-        </h3>
+      <div className="glass-card relative gradient-border-top max-w-md w-full z-10 animate-modalSlideUp">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-3xl font-bold gradient-text">
+            Send SCT Tokens
+          </h3>
+          <button
+            onClick={handleClose}
+            className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 text-gray-400 hover:text-white hover:rotate-90"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           {/* Recipient Address */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs uppercase text-muted mb-2 font-medium tracking-wider">
               To Address
             </label>
             <div className="relative">
@@ -110,13 +120,19 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
                 value={recipient}
                 onChange={(e) => setRecipient(e.target.value)}
                 placeholder="0x..."
-                className="w-full px-4 py-3 glass rounded-lg border border-white/10 focus:border-cyan-400/50 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 text-white font-mono text-sm transition-all"
+                className="input-dark w-full font-mono"
               />
-              {recipient && validateAddress(recipient) && (
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-400">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+              {recipient && (
+                <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                  {validateAddress(recipient) ? (
+                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-orange-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  )}
                 </div>
               )}
             </div>
@@ -124,7 +140,7 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs uppercase text-muted mb-2 font-medium tracking-wider">
               Amount (SCT)
             </label>
             <div className="relative">
@@ -136,7 +152,7 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
                 step="0.01"
                 min="0"
                 max={maxBalance}
-                className="w-full px-4 py-3 glass rounded-lg border border-white/10 focus:border-cyan-400/50 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 text-white font-semibold text-lg transition-all"
+                className="input-dark w-full text-lg font-semibold"
               />
               <button
                 onClick={() => setAmount(maxBalance)}
@@ -145,18 +161,18 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
                 Max
               </button>
             </div>
-            <p className="text-xs text-gray-400 mt-1">Available: {maxBalance} SCT</p>
+            <p className="text-xs text-muted mt-2">Available: {maxBalance} SCT</p>
           </div>
 
           {/* Gas Estimate */}
-          <div className="glass p-3 rounded-lg">
-            <p className="text-xs text-gray-400">Estimated gas: ~0.001 ETH</p>
+          <div className="bg-white/5 border border-white/10 p-3 rounded-lg">
+            <p className="text-xs text-muted">Estimated gas: ~0.001 ETH</p>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-              <p className="text-sm text-red-400">{error}</p>
+            <div className="p-3 bg-orange-red/10 border border-orange-red/30 rounded-lg animate-fadeIn">
+              <p className="text-sm text-orange-red">{error}</p>
             </div>
           )}
 
@@ -165,7 +181,7 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
             <button
               onClick={handleSend}
               disabled={isPending || isConfirming}
-              className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold shadow-lg disabled:shadow-none flex items-center justify-center gap-2"
+              className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPending || isConfirming ? (
                 <>
@@ -173,14 +189,19 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
                   {isPending ? 'Sending...' : 'Confirming...'}
                 </>
               ) : (
-                'Send'
+                <>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                  Send
+                </>
               )}
             </button>
             
             <button
               onClick={handleClose}
               disabled={isPending || isConfirming}
-              className="w-full px-6 py-3 glass border border-cyan-400/50 hover:bg-cyan-500/10 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-medium"
+              className="btn-secondary w-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>

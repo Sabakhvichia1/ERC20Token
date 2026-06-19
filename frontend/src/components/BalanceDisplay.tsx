@@ -39,23 +39,29 @@ export function BalanceDisplay() {
 
   if (!isConnected) {
     return (
-      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+      <div className="glass-card relative gradient-border-top">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Your Balance
         </h2>
-        <p className="text-6xl font-bold text-gray-500/30 mb-6">0.00 {TOKEN_SYMBOL}</p>
-        <p className="text-sm text-gray-400 mb-6">Connect wallet to view balance</p>
-        <div className="space-y-3">
+        <p className="text-5xl md:text-6xl font-bold text-gray-500/30 mb-6">0.00 {TOKEN_SYMBOL}</p>
+        <p className="text-sm text-muted mb-8">Connect wallet to view balance</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             disabled
-            className="w-full px-6 py-3 glass border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-medium"
+            className="px-6 py-3 bg-gray-600/20 border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-semibold flex items-center justify-center gap-2"
           >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
             Send Tokens
           </button>
           <button
             disabled
-            className="w-full px-6 py-3 glass border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-medium"
+            className="px-6 py-3 bg-gray-600/20 border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-semibold flex items-center justify-center gap-2"
           >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m0 0l-4-4m4 4l4-4" />
+            </svg>
             Receive
           </button>
         </div>
@@ -65,25 +71,25 @@ export function BalanceDisplay() {
 
   if (SABA_TOKEN_ADDRESS === '0x0000000000000000000000000000000000000000') {
     return (
-      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+      <div className="glass-card relative gradient-border-top">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Your Balance
         </h2>
-        <p className="text-yellow-400 mb-2">⚠️ Contract not configured</p>
-        <p className="text-sm text-gray-300">Please set contract address in .env.local</p>
+        <p className="text-orange-red mb-2">⚠️ Contract not configured</p>
+        <p className="text-sm text-secondary">Please set contract address in .env.local</p>
       </div>
     )
   }
 
   if (isLoading) {
     return (
-      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+      <div className="glass-card relative gradient-border-top">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Your Balance
         </h2>
         <div className="flex items-center gap-3 mb-6">
           <div className="w-8 h-8 border-3 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-lg text-gray-300">Loading balance...</p>
+          <p className="text-lg text-secondary">Loading balance...</p>
         </div>
       </div>
     )
@@ -91,15 +97,15 @@ export function BalanceDisplay() {
 
   if (isError) {
     return (
-      <div className="gradient-border rounded-2xl p-6 animate-slideUp" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
+      <div className="glass-card relative gradient-border-top">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Your Balance
         </h2>
-        <p className="text-red-400 mb-2">Failed to load balance</p>
-        <p className="text-sm text-gray-300 mb-4">Check your connection and network</p>
+        <p className="text-orange-red mb-2">Failed to load balance</p>
+        <p className="text-sm text-secondary mb-4">Check your connection and network</p>
         <button
           onClick={() => refetch()}
-          className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold"
+          className="btn-primary"
         >
           Retry
         </button>
@@ -111,35 +117,38 @@ export function BalanceDisplay() {
 
   return (
     <>
-      <div className="gradient-border rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-500 animate-slideUp" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text">
-          Your Balance & Actions
+      <div className="glass-card relative gradient-border-top">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
+          Your Balance
         </h2>
         
-        <div className="mb-6">
-          <div className="relative inline-block">
-            <p className="text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-transparent bg-clip-text mb-2 animate-glow">
-              {formattedBalance} {TOKEN_SYMBOL}
-            </p>
-          </div>
+        <div className="mb-8">
+          <p className="text-5xl md:text-6xl font-bold gradient-text mb-3 animate-glow">
+            {formattedBalance} {TOKEN_SYMBOL}
+          </p>
           
-          <div className="flex items-center gap-2 text-sm">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-gray-400">Live updates</span>
+          <div className="flex items-center gap-2 text-sm status-live">
+            <span className="text-muted">Live updates</span>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50"
+            className="btn-primary flex items-center justify-center gap-2"
           >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
             Send Tokens
           </button>
           
           <button
-            className="w-full px-6 py-3 glass border border-purple-400/50 hover:bg-purple-500/10 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-medium"
+            className="btn-secondary flex items-center justify-center gap-2"
           >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m0 0l-4-4m4 4l4-4" />
+            </svg>
             Receive
           </button>
         </div>

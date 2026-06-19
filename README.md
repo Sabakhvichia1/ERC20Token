@@ -81,7 +81,7 @@ npm run dev
 ## Features
 
 ✅ ERC-20 token (SabaToken - SCT)
-✅ 1,000,000 token supply
+✅ 14 token supply
 ✅ MetaMask wallet connection
 ✅ Real-time balance display
 ✅ Token information with Etherscan links
@@ -116,7 +116,7 @@ npm run start    # Start production server
 - **Name**: Saba Custom Token
 - **Symbol**: SCT
 - **Decimals**: 18
-- **Total Supply**: 1,000,000 SCT
+- **Total Supply**: 14 SCT
 - **Network**: Sepolia Testnet
 
 ## License
