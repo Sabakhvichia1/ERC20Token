@@ -10,7 +10,7 @@ export const config = createConfig({
   transports: {
     [sepolia.id]: http(
       process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL || 
-      'https://eth-sepolia.g.alchemy.com/v2/demo'
+      'https://eth-sepolia.g.alchemy.com/v2/Z3_FcriBTKniY59lDQe3j'
     ),
   },
 })
