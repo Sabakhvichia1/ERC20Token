@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_SEPOLIA_RPC_URL": "@sepolia_rpc_url",
+    "NEXT_PUBLIC_CONTRACT_ADDRESS": "@contract_address"
+  }
+}
