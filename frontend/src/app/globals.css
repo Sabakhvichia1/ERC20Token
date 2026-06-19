@@ -5,11 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --indigo: #2D1B69;
-  --navy: #1A1547;
-  --cyan: #00D4FF;
-  --purple: #A855FF;
-  --pink: #EC4899;
+  --green-primary: #008060;
+  --green-light: #95BF47;
+  --green-bg: #F1F8F4;
+  --cream: #F6F3ED;
 }
 
 * {
@@ -17,8 +16,8 @@
 }
 
 body {
-  color: white;
-  background: linear-gradient(135deg, #2D1B69 0%, #1A1547 50%, #0F0B2E 100%);
+  color: #202223;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F6F3ED 50%, #E8F5E9 100%);
   background-attachment: fixed;
   min-height: 100vh;
   overflow-x: hidden;
@@ -28,23 +27,23 @@ body {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Glass morphism */
+/* Glass morphism - lighter for green theme */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(149, 191, 71, 0.2);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(0, 128, 96, 0.2);
 }
 
-/* Gradient border */
+/* Gradient border - green theme */
 .gradient-border {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
 }
 
@@ -54,7 +53,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #00D4FF, #A855FF);
+  background: linear-gradient(135deg, #95BF47, #008060);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -64,7 +63,7 @@ body {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -75,7 +74,7 @@ body {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -136,25 +135,25 @@ body {
     opacity: 1;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.8;
   }
 }
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 20px rgba(149, 191, 71, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(168, 85, 255, 0.5);
+    box-shadow: 0 0 40px rgba(0, 128, 96, 0.4);
   }
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 0.8s ease-out;
 }
 
 .animate-slideUp {
-  animation: slideUp 0.6s ease-out;
+  animation: slideUp 0.8s ease-out;
 }
 
 .animate-slideIn {
@@ -185,20 +184,20 @@ body {
   animation: glow 3s ease-in-out infinite;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - green theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(149, 191, 71, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #00D4FF, #A855FF);
+  background: linear-gradient(135deg, #95BF47, #008060);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #00D4FF, #EC4899);
+  background: linear-gradient(135deg, #008060, #95BF47);
 }
