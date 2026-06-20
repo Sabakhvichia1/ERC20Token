@@ -4,7 +4,7 @@
 
 The ERC-20 Token Platform is a full-stack decentralized application consisting of two primary subsystems:
 
-1. **Smart Contract System**: A Hardhat-based Solidity development environment for deploying an ERC-20 compliant token (SabaToken) to the Sepolia testnet
+1. **Smart Contract System**: A Hardhat-based Solidity development environment for deploying an ERC-20 compliant token (SamargaloToken) to the Sepolia testnet
 2. **Frontend Application**: A Next.js 14+ web application with Wagmi v2+ integration for wallet connection, token information display, and real-time balance tracking
 
 The platform enables users to deploy a standard ERC-20 token with a fixed supply of 1,000,000 tokens and interact with it through a modern, responsive web interface. The smart contract leverages OpenZeppelin's battle-tested ERC-20 implementation for security and reliability. The frontend provides seamless MetaMask integration and real-time blockchain data synchronization.
@@ -56,7 +56,7 @@ graph TB
     subgraph "Blockchain Layer"
         Alchemy[Alchemy RPC Provider]
         Sepolia[Sepolia Testnet]
-        SabaToken[SabaToken Contract]
+        SamargaloToken[SamargaloToken Contract]
     end
     
     subgraph "Development Tools"
@@ -78,7 +78,7 @@ graph TB
     Components --> Config
     WagmiProvider --> Alchemy
     Alchemy --> Sepolia
-    Sepolia --> SabaToken
+    Sepolia --> SamargaloToken
     
     Hardhat --> DeployScript
     DeployScript --> Alchemy
@@ -89,7 +89,7 @@ graph TB
     Browser --> Etherscan
     Components --> Etherscan
     
-    style SabaToken fill:#f9a825
+    style SamargaloToken fill:#f9a825
     style NextApp fill:#0070f3
     style MetaMask fill:#f6851b
 ```
@@ -98,7 +98,7 @@ graph TB
 
 The platform follows a three-tier architecture:
 
-1. **Blockchain Layer**: Ethereum Sepolia testnet hosts the SabaToken smart contract, accessed via Alchemy RPC provider
+1. **Blockchain Layer**: Ethereum Sepolia testnet hosts the SamargaloToken smart contract, accessed via Alchemy RPC provider
 2. **Application Layer**: Next.js frontend application with Wagmi integration for Web3 functionality
 3. **Presentation Layer**: React components rendering token information and managing user interactions
 
@@ -112,7 +112,7 @@ The platform follows a three-tier architecture:
 
 The smart contract system consists of a single, focused contract leveraging OpenZeppelin's ERC-20 implementation:
 
-**SabaToken Contract:**
+**SamargaloToken Contract:**
 - Inherits OpenZeppelin's ERC20 base contract
 - Mints fixed supply (1,000,000 tokens with 18 decimals) to deployer on construction
 - No additional minting capabilities (fixed supply model)
@@ -122,7 +122,7 @@ The smart contract system consists of a single, focused contract leveraging Open
 ```
 contracts/
 ├── contracts/
-│   └── SabaToken.sol          # ERC-20 token implementation
+│   └── SamargaloToken.sol          # ERC-20 token implementation
 ├── scripts/
 │   └── deploy.js              # Deployment script
 ├── hardhat.config.js          # Hardhat configuration
@@ -195,7 +195,7 @@ frontend/
 
 ### Smart Contract Components
 
-#### SabaToken Contract
+#### SamargaloToken Contract
 
 **Purpose**: ERC-20 compliant token contract with fixed supply minted to deployer.
 
@@ -203,11 +203,11 @@ frontend/
 
 **Constructor Signature:**
 ```solidity
-constructor() ERC20("Saba Custom Token", "SCT")
+constructor() ERC20("Samargalo Custom Token", "SCT")
 ```
 
 **Constructor Behavior:**
-1. Calls parent ERC20 constructor with name "Saba Custom Token" and symbol "SCT"
+1. Calls parent ERC20 constructor with name "Samargalo Custom Token" and symbol "SCT"
 2. Mints 1,000,000 tokens (1000000 * 10^18 wei) to `msg.sender` (deployer)
 
 **Inherited Public Interface (ERC-20 Standard):**
@@ -237,7 +237,7 @@ event Approval(address indexed owner, address indexed spender, uint256 value)
 
 #### Deployment Script
 
-**Purpose**: Deploy SabaToken to Sepolia testnet and save deployment artifacts.
+**Purpose**: Deploy SamargaloToken to Sepolia testnet and save deployment artifacts.
 
 **Interface:**
 ```javascript
@@ -247,7 +247,7 @@ async function main(): Promise<void>
 **Behavior:**
 1. Retrieves deployer account from Hardhat ethers provider
 2. Logs deployer address and balance
-3. Deploys SabaToken contract using `ContractFactory`
+3. Deploys SamargaloToken contract using `ContractFactory`
 4. Waits for deployment transaction to be mined
 5. Logs deployment information (contract address, transaction hash, deployer)
 6. Saves deployment data to `deployed-address.json` in project root
@@ -349,7 +349,7 @@ type WalletState = {
 **Props**: None (uses constants from configuration)
 
 **Data Sources:**
-- `SABA_TOKEN_ADDRESS` from constants
+- `SAMARGALO_TOKEN_ADDRESS` from constants
 - `SEPOLIA_ETHERSCAN_BASE_URL` from constants
 - Static metadata (name, symbol, description)
 
@@ -359,7 +359,7 @@ function TokenInfo(): JSX.Element
 
 // Uses constants
 const TOKEN_METADATA = {
-  name: "Saba Custom Token",
+  name: "Samargalo Custom Token",
   symbol: "SCT",
   description: string,
   contractAddress: `0x${string}`
@@ -380,7 +380,7 @@ const TOKEN_METADATA = {
 
 **Etherscan URL Construction:**
 ```typescript
-const etherscanUrl = `${SEPOLIA_ETHERSCAN_BASE_URL}/address/${SABA_TOKEN_ADDRESS}`
+const etherscanUrl = `${SEPOLIA_ETHERSCAN_BASE_URL}/address/${SAMARGALO_TOKEN_ADDRESS}`
 ```
 
 **Styling Requirements:**
@@ -423,8 +423,8 @@ type BalanceData = {
 **Balance Reading:**
 ```typescript
 useReadContract({
-  address: SABA_TOKEN_ADDRESS,
-  abi: SABA_TOKEN_ABI,
+  address: SAMARGALO_TOKEN_ADDRESS,
+  abi: SAMARGALO_TOKEN_ABI,
   functionName: 'balanceOf',
   args: [connectedAddress],
   watch: true  // Enable automatic refresh on new blocks
@@ -544,15 +544,15 @@ function RootLayout({ children }: { children: React.ReactNode }): JSX.Element
 **Exports:**
 ```typescript
 // Contract Configuration
-export const SABA_TOKEN_ADDRESS: `0x${string}` = "0x..." as const
-export const SABA_TOKEN_ABI = [...] as const
+export const SAMARGALO_TOKEN_ADDRESS: `0x${string}` = "0x..." as const
+export const SAMARGALO_TOKEN_ABI = [...] as const
 
 // Network Configuration
 export const SEPOLIA_CHAIN_ID = 11155111
 export const SEPOLIA_ETHERSCAN_BASE_URL = "https://sepolia.etherscan.io"
 
 // Token Metadata
-export const TOKEN_NAME = "Saba Custom Token"
+export const TOKEN_NAME = "Samargalo Custom Token"
 export const TOKEN_SYMBOL = "SCT"
 export const TOKEN_DECIMALS = 18
 ```
@@ -614,9 +614,9 @@ string private _name
 string private _symbol
 ```
 
-**SabaToken Initial State (Post-Deployment):**
+**SamargaloToken Initial State (Post-Deployment):**
 ```
-_name = "Saba Custom Token"
+_name = "Samargalo Custom Token"
 _symbol = "SCT"
 _totalSupply = 1000000 * 10^18  // 1 million tokens with 18 decimals
 _balances[deployer] = 1000000 * 10^18
@@ -731,8 +731,8 @@ interface TokenMetadata {
 ```typescript
 // Reading balance
 const { data: balance } = useReadContract({
-  address: SABA_TOKEN_ADDRESS,
-  abi: SABA_TOKEN_ABI,
+  address: SAMARGALO_TOKEN_ADDRESS,
+  abi: SAMARGALO_TOKEN_ABI,
   functionName: 'balanceOf',
   args: [walletAddress]
 })
@@ -801,7 +801,7 @@ The ERC-20 Token Platform includes several universal properties that should hold
 
 **OpenZeppelin ERC-20 Built-in Protection:**
 
-The SabaToken contract inherits comprehensive error handling from OpenZeppelin's ERC20 implementation:
+The SamargaloToken contract inherits comprehensive error handling from OpenZeppelin's ERC20 implementation:
 
 1. **Transfer Validation:**
    - Reverts with `ERC20InsufficientBalance` if sender balance is insufficient
@@ -829,14 +829,14 @@ try {
   }
   
   // Deploy contract
-  const sabaToken = await ethers.deployContract("SabaToken")
-  await sabaToken.waitForDeployment()
+  const samargaloToken = await ethers.deployContract("SamargaloToken")
+  await samargaloToken.waitForDeployment()
   
   // Save deployment info
   const deploymentInfo = {
-    contractAddress: await sabaToken.getAddress(),
+    contractAddress: await samargaloToken.getAddress(),
     deployer: deployer.address,
-    transactionHash: sabaToken.deploymentTransaction()?.hash,
+    transactionHash: samargaloToken.deploymentTransaction()?.hash,
     network: "sepolia",
     timestamp: new Date().toISOString()
   }
@@ -890,8 +890,8 @@ if (connectError) {
 ```typescript
 // BalanceDisplay component error handling
 const { data: balance, isError, error } = useReadContract({
-  address: SABA_TOKEN_ADDRESS,
-  abi: SABA_TOKEN_ABI,
+  address: SAMARGALO_TOKEN_ADDRESS,
+  abi: SAMARGALO_TOKEN_ABI,
   functionName: 'balanceOf',
   args: [address]
 })
@@ -973,9 +973,9 @@ The ERC-20 Token Platform uses a multi-layered testing approach combining unit t
 
 1. **Unit Tests - ERC-20 Standard Compliance:**
    ```javascript
-   describe("SabaToken", function() {
+   describe("SamargaloToken", function() {
      it("should have correct name", async function() {
-       expect(await token.name()).to.equal("Saba Custom Token")
+       expect(await token.name()).to.equal("Samargalo Custom Token")
      })
      
      it("should have correct symbol", async function() {
@@ -1012,10 +1012,10 @@ The ERC-20 Token Platform uses a multi-layered testing approach combining unit t
    describe("Deployment", function() {
      it("should deploy to Sepolia testnet", async function() {
        // This test runs against actual Sepolia fork
-       const sabaToken = await ethers.deployContract("SabaToken")
-       await sabaToken.waitForDeployment()
+       const samargaloToken = await ethers.deployContract("SamargaloToken")
+       await samargaloToken.waitForDeployment()
        
-       const address = await sabaToken.getAddress()
+       const address = await samargaloToken.getAddress()
        expect(address).to.match(/^0x[a-fA-F0-9]{40}$/)
      })
      
@@ -1030,7 +1030,7 @@ The ERC-20 Token Platform uses a multi-layered testing approach combining unit t
    ```
 
 **Test Coverage Goals:**
-- 100% coverage of SabaToken contract functions
+- 100% coverage of SamargaloToken contract functions
 - All ERC-20 standard functions tested
 - Event emission verified for all state changes
 - Edge cases: zero address, zero amount, insufficient balance
@@ -1160,8 +1160,8 @@ The ERC-20 Token Platform uses a multi-layered testing approach combining unit t
    describe('BalanceDisplay Integration', () => {
      it('fetches balance from contract', async () => {
        const { result } = renderHook(() => useReadContract({
-         address: SABA_TOKEN_ADDRESS,
-         abi: SABA_TOKEN_ABI,
+         address: SAMARGALO_TOKEN_ADDRESS,
+         abi: SAMARGALO_TOKEN_ABI,
          functionName: 'balanceOf',
          args: [mockAddress]
        }), {
@@ -1271,7 +1271,7 @@ ALCHEMY_SEPOLIA_URL=https://eth-sepolia.g.alchemy.com/v2/your_api_key
    ```
    
    Verify compilation produces:
-   - `artifacts/contracts/SabaToken.sol/SabaToken.json` (ABI and bytecode)
+   - `artifacts/contracts/SamargaloToken.sol/SamargaloToken.json` (ABI and bytecode)
    - No compilation errors or warnings
 
 3. **Run Tests:**
@@ -1290,7 +1290,7 @@ ALCHEMY_SEPOLIA_URL=https://eth-sepolia.g.alchemy.com/v2/your_api_key
    ```
    Deploying contracts with the account: 0x...
    Account balance: X ETH
-   SabaToken deployed to: 0x...
+   SamargaloToken deployed to: 0x...
    Transaction hash: 0x...
    Deployment info saved to deployed-address.json
    ```
@@ -1307,7 +1307,7 @@ ALCHEMY_SEPOLIA_URL=https://eth-sepolia.g.alchemy.com/v2/your_api_key
    Extract `contractAddress` from `deployed-address.json`
 
 2. **Copy ABI:**
-   Extract ABI from `artifacts/contracts/SabaToken.sol/SabaToken.json`
+   Extract ABI from `artifacts/contracts/SamargaloToken.sol/SamargaloToken.json`
 
 3. **Update Frontend Configuration:**
    Add contract address and ABI to `frontend/src/lib/constants.ts`
@@ -1316,7 +1316,7 @@ ALCHEMY_SEPOLIA_URL=https://eth-sepolia.g.alchemy.com/v2/your_api_key
 
 **Prerequisites:**
 1. Node.js 18+ installed
-2. Deployed SabaToken contract address
+2. Deployed SamargaloToken contract address
 3. Cloudflare Pages account
 4. Alchemy RPC URL for Sepolia
 
@@ -1338,8 +1338,8 @@ NEXT_PUBLIC_ALCHEMY_URL=https://eth-sepolia.g.alchemy.com/v2/your_api_key
 2. **Update Configuration:**
    Edit `src/lib/constants.ts`:
    ```typescript
-   export const SABA_TOKEN_ADDRESS = '0x...' // Deployed contract address
-   export const SABA_TOKEN_ABI = [...] // ABI from compilation artifacts
+   export const SAMARGALO_TOKEN_ADDRESS = '0x...' // Deployed contract address
+   export const SAMARGALO_TOKEN_ABI = [...] // ABI from compilation artifacts
    ```
 
 3. **Run Development Server (Test Locally):**
@@ -1443,9 +1443,9 @@ npx hardhat init
 
 Select "Create a JavaScript project" when prompted.
 
-**Step 2: SabaToken Contract**
+**Step 2: SamargaloToken Contract**
 
-Create `contracts/SabaToken.sol`:
+Create `contracts/SamargaloToken.sol`:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -1454,17 +1454,17 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /**
- * @title SabaToken
+ * @title SamargaloToken
  * @dev ERC-20 token with fixed supply minted to deployer
  */
-contract SabaToken is ERC20 {
+contract SamargaloToken is ERC20 {
     /**
      * @dev Constructor that mints 1,000,000 tokens to the contract deployer
-     * Token name: "Saba Custom Token"
+     * Token name: "Samargalo Custom Token"
      * Token symbol: "SCT"
      * Decimals: 18 (default)
      */
-    constructor() ERC20("Saba Custom Token", "SCT") {
+    constructor() ERC20("Samargalo Custom Token", "SCT") {
         _mint(msg.sender, 1000000 * 10 ** decimals());
     }
 }
@@ -1517,16 +1517,16 @@ async function main() {
   const balance = await hre.ethers.provider.getBalance(deployer.address);
   console.log("Account balance:", hre.ethers.formatEther(balance), "ETH");
   
-  // Deploy SabaToken
-  console.log("Deploying SabaToken...");
-  const SabaToken = await hre.ethers.getContractFactory("SabaToken");
-  const sabaToken = await SabaToken.deploy();
-  await sabaToken.waitForDeployment();
+  // Deploy SamargaloToken
+  console.log("Deploying SamargaloToken...");
+  const SamargaloToken = await hre.ethers.getContractFactory("SamargaloToken");
+  const samargaloToken = await SamargaloToken.deploy();
+  await samargaloToken.waitForDeployment();
   
-  const contractAddress = await sabaToken.getAddress();
-  const deploymentTx = sabaToken.deploymentTransaction();
+  const contractAddress = await samargaloToken.getAddress();
+  const deploymentTx = samargaloToken.deploymentTransaction();
   
-  console.log("SabaToken deployed to:", contractAddress);
+  console.log("SamargaloToken deployed to:", contractAddress);
   console.log("Transaction hash:", deploymentTx.hash);
   
   // Save deployment information
@@ -1556,41 +1556,41 @@ main()
 
 **Step 5: Create Tests**
 
-Create `test/SabaToken.test.js`:
+Create `test/SamargaloToken.test.js`:
 
 ```javascript
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("SabaToken", function () {
-  let sabaToken;
+describe("SamargaloToken", function () {
+  let samargaloToken;
   let owner;
   let addr1;
   let addr2;
 
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
-    const SabaToken = await ethers.getContractFactory("SabaToken");
-    sabaToken = await SabaToken.deploy();
-    await sabaToken.waitForDeployment();
+    const SamargaloToken = await ethers.getContractFactory("SamargaloToken");
+    samargaloToken = await SamargaloToken.deploy();
+    await samargaloToken.waitForDeployment();
   });
 
   describe("Deployment", function () {
     it("Should have correct name", async function () {
-      expect(await sabaToken.name()).to.equal("Saba Custom Token");
+      expect(await samargaloToken.name()).to.equal("Samargalo Custom Token");
     });
 
     it("Should have correct symbol", async function () {
-      expect(await sabaToken.symbol()).to.equal("SCT");
+      expect(await samargaloToken.symbol()).to.equal("SCT");
     });
 
     it("Should mint 1M tokens to deployer", async function () {
-      const ownerBalance = await sabaToken.balanceOf(owner.address);
+      const ownerBalance = await samargaloToken.balanceOf(owner.address);
       expect(ownerBalance).to.equal(ethers.parseEther("1000000"));
     });
 
     it("Should have total supply of 1M tokens", async function () {
-      const totalSupply = await sabaToken.totalSupply();
+      const totalSupply = await samargaloToken.totalSupply();
       expect(totalSupply).to.equal(ethers.parseEther("1000000"));
     });
   });
@@ -1598,50 +1598,50 @@ describe("SabaToken", function () {
   describe("Transfers", function () {
     it("Should transfer tokens between accounts", async function () {
       const transferAmount = ethers.parseEther("100");
-      await sabaToken.transfer(addr1.address, transferAmount);
-      const addr1Balance = await sabaToken.balanceOf(addr1.address);
+      await samargaloToken.transfer(addr1.address, transferAmount);
+      const addr1Balance = await samargaloToken.balanceOf(addr1.address);
       expect(addr1Balance).to.equal(transferAmount);
     });
 
     it("Should emit Transfer event", async function () {
       const transferAmount = ethers.parseEther("100");
-      await expect(sabaToken.transfer(addr1.address, transferAmount))
-        .to.emit(sabaToken, "Transfer")
+      await expect(samargaloToken.transfer(addr1.address, transferAmount))
+        .to.emit(samargaloToken, "Transfer")
         .withArgs(owner.address, addr1.address, transferAmount);
     });
 
     it("Should fail if sender doesn't have enough tokens", async function () {
-      const initialOwnerBalance = await sabaToken.balanceOf(owner.address);
+      const initialOwnerBalance = await samargaloToken.balanceOf(owner.address);
       await expect(
-        sabaToken.connect(addr1).transfer(owner.address, 1)
-      ).to.be.revertedWithCustomError(sabaToken, "ERC20InsufficientBalance");
+        samargaloToken.connect(addr1).transfer(owner.address, 1)
+      ).to.be.revertedWithCustomError(samargaloToken, "ERC20InsufficientBalance");
     });
   });
 
   describe("Approvals", function () {
     it("Should approve tokens for delegated transfer", async function () {
       const approveAmount = ethers.parseEther("100");
-      await sabaToken.approve(addr1.address, approveAmount);
-      const allowance = await sabaToken.allowance(owner.address, addr1.address);
+      await samargaloToken.approve(addr1.address, approveAmount);
+      const allowance = await samargaloToken.allowance(owner.address, addr1.address);
       expect(allowance).to.equal(approveAmount);
     });
 
     it("Should emit Approval event", async function () {
       const approveAmount = ethers.parseEther("100");
-      await expect(sabaToken.approve(addr1.address, approveAmount))
-        .to.emit(sabaToken, "Approval")
+      await expect(samargaloToken.approve(addr1.address, approveAmount))
+        .to.emit(samargaloToken, "Approval")
         .withArgs(owner.address, addr1.address, approveAmount);
     });
 
     it("Should allow delegated transfer", async function () {
       const approveAmount = ethers.parseEther("100");
-      await sabaToken.approve(addr1.address, approveAmount);
-      await sabaToken.connect(addr1).transferFrom(
+      await samargaloToken.approve(addr1.address, approveAmount);
+      await samargaloToken.connect(addr1).transferFrom(
         owner.address,
         addr2.address,
         approveAmount
       );
-      const addr2Balance = await sabaToken.balanceOf(addr2.address);
+      const addr2Balance = await samargaloToken.balanceOf(addr2.address);
       expect(addr2Balance).to.equal(approveAmount);
     });
   });
@@ -1691,9 +1691,9 @@ declare module 'wagmi' {
 Create `src/lib/constants.ts`:
 
 ```typescript
-export const SABA_TOKEN_ADDRESS = '0x...' as const // Replace with deployed address
+export const SAMARGALO_TOKEN_ADDRESS = '0x...' as const // Replace with deployed address
 
-export const SABA_TOKEN_ABI = [
+export const SAMARGALO_TOKEN_ABI = [
   {
     "inputs": [],
     "name": "name",
@@ -1727,7 +1727,7 @@ export const SABA_TOKEN_ABI = [
 export const SEPOLIA_CHAIN_ID = 11155111
 export const SEPOLIA_ETHERSCAN_BASE_URL = 'https://sepolia.etherscan.io'
 
-export const TOKEN_NAME = 'Saba Custom Token'
+export const TOKEN_NAME = 'Samargalo Custom Token'
 export const TOKEN_SYMBOL = 'SCT'
 export const TOKEN_DECIMALS = 18
 ```
@@ -1750,7 +1750,7 @@ const inter = Inter({ subsets: ['latin'] })
 const queryClient = new QueryClient()
 
 export const metadata: Metadata = {
-  title: 'Saba Custom Token Platform',
+  title: 'Samargalo Custom Token Platform',
   description: 'ERC-20 token platform on Sepolia testnet',
 }
 
@@ -1843,15 +1843,15 @@ Create `src/components/BalanceDisplay.tsx`:
 'use client'
 
 import { useAccount, useReadContract } from 'wagmi'
-import { SABA_TOKEN_ADDRESS, SABA_TOKEN_ABI, TOKEN_SYMBOL } from '@/lib/constants'
+import { SAMARGALO_TOKEN_ADDRESS, SAMARGALO_TOKEN_ABI, TOKEN_SYMBOL } from '@/lib/constants'
 import { formatUnits } from 'viem'
 
 export function BalanceDisplay() {
   const { address, isConnected } = useAccount()
 
   const { data: balance, isLoading, isError, refetch } = useReadContract({
-    address: SABA_TOKEN_ADDRESS,
-    abi: SABA_TOKEN_ABI,
+    address: SAMARGALO_TOKEN_ADDRESS,
+    abi: SAMARGALO_TOKEN_ABI,
     functionName: 'balanceOf',
     args: address ? [address] : undefined,
     query: {
@@ -1921,10 +1921,10 @@ Create `src/components/TokenInfo.tsx`:
 ```typescript
 'use client'
 
-import { SABA_TOKEN_ADDRESS, SEPOLIA_ETHERSCAN_BASE_URL, TOKEN_NAME, TOKEN_SYMBOL } from '@/lib/constants'
+import { SAMARGALO_TOKEN_ADDRESS, SEPOLIA_ETHERSCAN_BASE_URL, TOKEN_NAME, TOKEN_SYMBOL } from '@/lib/constants'
 
 export function TokenInfo() {
-  const etherscanUrl = `${SEPOLIA_ETHERSCAN_BASE_URL}/address/${SABA_TOKEN_ADDRESS}`
+  const etherscanUrl = `${SEPOLIA_ETHERSCAN_BASE_URL}/address/${SAMARGALO_TOKEN_ADDRESS}`
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -1936,7 +1936,7 @@ export function TokenInfo() {
         </div>
         <div>
           <p className="text-sm text-gray-600">Contract Address</p>
-          <p className="font-mono text-sm break-all">{SABA_TOKEN_ADDRESS}</p>
+          <p className="font-mono text-sm break-all">{SAMARGALO_TOKEN_ADDRESS}</p>
         </div>
         <div>
           <p className="text-sm text-gray-600 mb-2">Description</p>
@@ -1972,7 +1972,7 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-900">
-            Saba Token Platform
+            Samargalo Token Platform
           </h1>
           <WalletButton />
         </div>
@@ -1991,7 +1991,7 @@ Update `src/app/page.tsx`:
 import { Header } from '@/components/Header'
 import { TokenInfo } from '@/components/TokenInfo'
 import { BalanceDisplay } from '@/components/BalanceDisplay'
-import { SEPOLIA_ETHERSCAN_BASE_URL, SABA_TOKEN_ADDRESS } from '@/lib/constants'
+import { SEPOLIA_ETHERSCAN_BASE_URL, SAMARGALO_TOKEN_ADDRESS } from '@/lib/constants'
 
 export default function Home() {
   return (
@@ -2002,7 +2002,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to Saba Token Platform
+            Welcome to Samargalo Token Platform
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Connect your MetaMask wallet to view your SCT token balance and 
@@ -2020,7 +2020,7 @@ export default function Home() {
         <footer className="text-center text-gray-600 space-y-2">
           <p>
             <a
-              href={`${SEPOLIA_ETHERSCAN_BASE_URL}/address/${SABA_TOKEN_ADDRESS}`}
+              href={`${SEPOLIA_ETHERSCAN_BASE_URL}/address/${SAMARGALO_TOKEN_ADDRESS}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"

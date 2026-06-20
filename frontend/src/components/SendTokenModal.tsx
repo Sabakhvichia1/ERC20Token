@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { parseEther } from 'viem'
-import { SABA_TOKEN_ADDRESS, SABA_TOKEN_ABI } from '@/lib/constants'
+import { SAMARGALO_TOKEN_ADDRESS, SAMARGALO_TOKEN_ABI } from '@/lib/constants'
 
 interface SendTokenModalProps {
   isOpen: boolean
@@ -45,8 +45,8 @@ export function SendTokenModal({ isOpen, onClose, maxBalance }: SendTokenModalPr
 
     try {
       writeContract({
-        address: SABA_TOKEN_ADDRESS,
-        abi: SABA_TOKEN_ABI,
+        address: SAMARGALO_TOKEN_ADDRESS,
+        abi: SAMARGALO_TOKEN_ABI,
         functionName: 'transfer',
         args: [recipient as `0x${string}`, parseEther(amount)],
       })

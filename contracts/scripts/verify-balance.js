@@ -1,7 +1,7 @@
 const hre = require("hardhat");
 
 async function main() {
-  console.log("🔍 Verifying SabaToken Balance on Sepolia...\n");
+  console.log("🔍 Verifying SamargaloToken Balance on Sepolia...\n");
 
   // Contract details
   const contractAddress = "0xcECeBe2ee52740FEb89a5FF3e6A782Ef903C11CE";
@@ -16,8 +16,8 @@ async function main() {
 
   try {
     // Get the contract instance
-    const SabaToken = await hre.ethers.getContractFactory("SabaToken");
-    const token = SabaToken.attach(contractAddress);
+    const SamargaloToken = await hre.ethers.getContractFactory("SamargaloToken");
+    const token = SamargaloToken.attach(contractAddress);
 
     console.log("✅ Connected to contract\n");
 

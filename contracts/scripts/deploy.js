@@ -11,16 +11,16 @@ async function main() {
   const balance = await hre.ethers.provider.getBalance(deployer.address);
   console.log("Account balance:", hre.ethers.formatEther(balance), "ETH");
   
-  // Deploy SabaToken
-  console.log("Deploying SabaToken...");
-  const SabaToken = await hre.ethers.getContractFactory("SabaToken");
-  const sabaToken = await SabaToken.deploy();
-  await sabaToken.waitForDeployment();
+  // Deploy SamargaloToken
+  console.log("Deploying SamargaloToken...");
+  const SamargaloToken = await hre.ethers.getContractFactory("SamargaloToken");
+  const samargaloToken = await SamargaloToken.deploy();
+  await samargaloToken.waitForDeployment();
   
-  const contractAddress = await sabaToken.getAddress();
-  const deploymentTx = sabaToken.deploymentTransaction();
+  const contractAddress = await samargaloToken.getAddress();
+  const deploymentTx = samargaloToken.deploymentTransaction();
   
-  console.log("SabaToken deployed to:", contractAddress);
+  console.log("SamargaloToken deployed to:", contractAddress);
   console.log("Transaction hash:", deploymentTx.hash);
   
   // Save deployment information

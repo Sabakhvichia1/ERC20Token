@@ -1,6 +1,6 @@
-export const SABA_TOKEN_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || '0xcECeBe2ee52740FEb89a5FF3e6A782Ef903C11CE') as `0x${string}`
+export const SAMARGALO_TOKEN_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || '0xcECeBe2ee52740FEb89a5FF3e6A782Ef903C11CE') as `0x${string}`
 
-export const SABA_TOKEN_ABI = [
+export const SAMARGALO_TOKEN_ABI = [
   {
     "inputs": [],
     "name": "name",
@@ -92,6 +92,6 @@ export const SABA_TOKEN_ABI = [
 export const SEPOLIA_CHAIN_ID = 11155111
 export const SEPOLIA_ETHERSCAN_BASE_URL = 'https://sepolia.etherscan.io'
 
-export const TOKEN_NAME = 'Saba Custom Token'
+export const TOKEN_NAME = 'Samargalo Custom Token'
 export const TOKEN_SYMBOL = 'SCT'
 export const TOKEN_DECIMALS = 18

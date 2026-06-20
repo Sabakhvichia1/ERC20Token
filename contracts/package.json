@@ -1,7 +1,7 @@
 {
-  "name": "saba-token-contracts",
+  "name": "samargalo-token-contracts",
   "version": "1.0.0",
-  "description": "Hardhat project for SabaToken ERC-20 deployment",
+  "description": "Hardhat project for SamargaloToken ERC-20 deployment",
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",

@@ -1,0 +1,134 @@
+Create a professional PowerPoint presentation about my Sabsona Custom Token (SCT) project with the following specifications:
+
+PROJECT OVERVIEW:
+- Project Name: Sabsona Custom Token (SCT)
+- Type: Full-stack Web3 DApp with ERC-20 token
+- Network: Ethereum Sepolia Testnet
+- Technology Stack: Solidity, Hardhat, Next.js 14, TypeScript, Tailwind CSS, Wagmi, Viem
+
+KEY FEATURES TO HIGHLIGHT:
+1. Custom ERC-20 Token (Sabsona Custom Token - SCT)
+   - Symbol: SCT
+   - Total Supply: 14 tokens
+   - Deployed on Sepolia testnet
+   - OpenZeppelin standards compliant
+
+2. Modern Web3 Frontend
+   - Built with Next.js 14 and TypeScript
+   - MetaMask wallet integration
+   - Real-time blockchain balance display
+   - Responsive design (mobile + desktop)
+   - Premium glassmorphic UI with gradient effects
+
+3. Interactive Gamification System
+   - Crypto Quiz: 5 questions about blockchain basics, earn 1 SCT for passing (3+ correct)
+   - Tic Tac Toe Game: Beat the AI computer, earn 2 SCT for winning
+   - Instant reward claiming with visual animations
+   - Golden coin floating animations when rewards are claimed
+   - Animated balance counter with glow effects
+
+4. Smart Balance System
+   - Displays real blockchain balance (actual tokens in wallet)
+   - Overlays game rewards on top (stored locally in browser)
+   - Combined display: Real Balance + Game Rewards
+   - Smooth counting animations when balance increases
+   - Visual indicators: scale effects, glow, bouncing "+X SCT!" messages
+
+TECHNICAL ARCHITECTURE:
+- Smart Contracts: Solidity 0.8.20, deployed via Hardhat
+- Frontend: Next.js 14 with App Router, Server & Client Components
+- Web3 Integration: Wagmi v2+ hooks, Viem for Ethereum interactions
+- Styling: Tailwind CSS with custom glassmorphic design system
+- State Management: React Context API for game rewards
+- Persistence: localStorage for game reward tracking
+- Network: Alchemy RPC endpoint for Sepolia access
+
+USER FLOW:
+1. User connects MetaMask wallet to the dApp
+2. Views their real SCT balance from blockchain
+3. Participates in Crypto Quiz or Tic Tac Toe game
+4. Wins/passes the challenge
+5. Clicks "Claim Reward" button (instant, no blockchain transaction)
+6. Sees golden coin animation floating up the screen
+7. Balance display counts up with visual effects
+8. Game rewards add to displayed balance (real balance + game rewards)
+9. Can play again to earn more (once per game type)
+
+VISUAL DESIGN ELEMENTS:
+- Color Scheme: Deep purple/navy gradient background (#2D1B69, #1A1547, #0F0B2E)
+- Accent Colors: Cyan (#00D4FF) and Purple (#A855FF) gradients
+- Card Style: Glassmorphic with backdrop blur and subtle borders
+- Animations: Smooth transitions, floating tokens, counting numbers, glow effects
+- Typography: Inter font for UI, JetBrains Mono for code elements
+- Icons: Custom gradient logo, SVG icons for actions
+
+INNOVATION HIGHLIGHTS:
+- Dual balance system: Real blockchain + Game rewards overlay
+- No-cost reward claiming for users (no gas fees for game rewards)
+- Educational component via crypto quiz
+- Entertainment value through interactive game
+- Professional-grade UI/UX design
+- Fully responsive across all devices
+- localStorage persistence for seamless user experience
+
+DEPLOYMENT DETAILS:
+- Contract deployed on Sepolia testnet (public test network)
+- Frontend deployable to Vercel/Netlify
+- Environment variables for RPC URLs and contract address
+- Git-based version control
+
+TARGET AUDIENCE:
+- Crypto enthusiasts learning about tokens
+- Web3 developers exploring dApp architecture
+- Students interested in blockchain technology
+- Anyone wanting to experience Web3 without risk
+
+PROJECT ACHIEVEMENTS:
+- Full ERC-20 token implementation
+- Complete frontend-backend integration
+- Interactive reward system
+- Professional visual design
+- Educational value through quiz
+- Entertainment through gaming
+- Real blockchain interaction
+- Local state management for instant UX
+
+PRESENTATION STRUCTURE REQUESTED:
+1. Title Slide - Project name, logo concept, your name
+2. Introduction - What is Sabsona Custom Token?
+3. Problem Statement - Why build this project?
+4. Solution Overview - Full-stack Web3 dApp with gamification
+5. Technical Architecture - Diagram of smart contract + frontend + Web3 integration
+6. Token Details - ERC-20 specs, supply, network
+7. Key Feature: Crypto Quiz - Screenshots/mockup, how it works, rewards
+8. Key Feature: Tic Tac Toe Game - Screenshots/mockup, gameplay, rewards
+9. Balance System - How blockchain + game rewards combine
+10. Visual Design - UI/UX highlights, color scheme, animations
+11. Technology Stack - All technologies used with logos
+12. User Journey - Step-by-step flow with visuals
+13. Innovation & Uniqueness - What makes this special
+14. Demo Screenshots - Main page, quiz, game, balance display
+15. Technical Challenges & Solutions - What you overcame
+16. Future Enhancements - Possible improvements (leaderboard, more games, NFT rewards)
+17. Conclusion - Summary of achievements
+18. Thank You / Q&A Slide
+
+DESIGN REQUIREMENTS:
+- Professional and modern aesthetic
+- Use gradient backgrounds (purple/cyan theme)
+- Include relevant icons and graphics
+- Clear hierarchy and readable text
+- Consistent styling across all slides
+- Visual diagrams for technical concepts
+- Screenshot placeholders where applicable
+- Smooth transitions between slides
+- High contrast for readability
+
+TONE & STYLE:
+- Professional but accessible
+- Technical but understandable
+- Enthusiastic about Web3/blockchain
+- Educational and informative
+- Visually engaging
+
+Please create the PowerPoint presentation with all these elements, ensuring each slide is visually appealing, informative, and tells the complete story of the Sabsona Custom Token project. Include speaker notes for each slide with additional details I can reference during presentation.

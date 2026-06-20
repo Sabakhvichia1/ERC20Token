@@ -13,25 +13,25 @@ async function main() {
   console.log("💰 Amount: 10 SCT\n");
 
   // Get contract instance
-  const SabaToken = await hre.ethers.getContractAt(
-    "SabaToken",
+  const SamargaloToken = await hre.ethers.getContractAt(
+    "SamargaloToken",
     tokenAddress
   );
 
   // Check balance before
-  const balanceBefore = await SabaToken.balanceOf(sender.address);
+  const balanceBefore = await SamargaloToken.balanceOf(sender.address);
   console.log("Balance before:", hre.ethers.formatUnits(balanceBefore, 18), "SCT");
 
   // Send tokens
   console.log("\n⏳ Sending transaction...");
-  const tx = await SabaToken.transfer(instructorAddress, amount);
+  const tx = await SamargaloToken.transfer(instructorAddress, amount);
   console.log("Transaction sent! Hash:", tx.hash);
   
   console.log("⏳ Waiting for confirmation...");
   await tx.wait();
 
   // Check balance after
-  const balanceAfter = await SabaToken.balanceOf(sender.address);
+  const balanceAfter = await SamargaloToken.balanceOf(sender.address);
   console.log("\n✅ Transaction confirmed!");
   console.log("Balance after:", hre.ethers.formatUnits(balanceAfter, 18), "SCT");
   console.log("\n🎉 Successfully sent 10 SCT to instructor!");

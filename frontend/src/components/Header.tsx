@@ -12,7 +12,7 @@ export function Header() {
               ST
             </div>
             <h1 className="text-xl font-bold text-white">
-              Saba Token
+              Samargalo Token
             </h1>
           </div>
           <WalletButton />

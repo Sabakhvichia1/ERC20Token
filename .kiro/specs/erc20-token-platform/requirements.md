@@ -2,15 +2,15 @@
 
 ## Introduction
 
-This document specifies requirements for a full-stack ERC-20 token platform that enables deployment and interaction with a custom token (Saba Custom Token) on the Sepolia testnet. The platform consists of a Hardhat-based smart contract deployment system and a Next.js frontend application with Web3 integration for token balance viewing and wallet management.
+This document specifies requirements for a full-stack ERC-20 token platform that enables deployment and interaction with a custom token (Samargalo Custom Token) on the Sepolia testnet. The platform consists of a Hardhat-based smart contract deployment system and a Next.js frontend application with Web3 integration for token balance viewing and wallet management.
 
 ## Glossary
 
 - **Smart_Contract_System**: The Hardhat-based deployment infrastructure for the ERC-20 token
-- **SabaToken**: The ERC-20 compliant token smart contract
+- **SamargaloToken**: The ERC-20 compliant token smart contract
 - **Frontend_Application**: The Next.js web application for interacting with the token
 - **Wallet_Connection_System**: The Wagmi-based Web3 integration layer
-- **Deployment_Script**: The Hardhat script that deploys SabaToken to Sepolia
+- **Deployment_Script**: The Hardhat script that deploys SamargaloToken to Sepolia
 - **Balance_Display_Component**: The React component showing user token balance
 - **Token_Info_Component**: The React component displaying token metadata
 - **Wallet_Button_Component**: The React component for connecting/disconnecting wallets
@@ -28,14 +28,14 @@ This document specifies requirements for a full-stack ERC-20 token platform that
 
 #### Acceptance Criteria
 
-1. THE SabaToken SHALL implement all ERC-20 standard functions (transfer, approve, transferFrom, balanceOf, allowance, totalSupply)
-2. WHEN SabaToken is deployed, THE SabaToken SHALL mint 1,000,000 tokens with 18 decimals to the deployer address
-3. THE SabaToken SHALL use OpenZeppelin ERC-20 library implementation
-4. THE SabaToken SHALL compile with Solidity version 0.8.20
-5. THE SabaToken SHALL emit Transfer events for all token movements
-6. THE SabaToken SHALL emit Approval events for all allowance changes
-7. THE SabaToken SHALL set token name to "Saba Custom Token"
-8. THE SabaToken SHALL set token symbol to "SCT"
+1. THE SamargaloToken SHALL implement all ERC-20 standard functions (transfer, approve, transferFrom, balanceOf, allowance, totalSupply)
+2. WHEN SamargaloToken is deployed, THE SamargaloToken SHALL mint 1,000,000 tokens with 18 decimals to the deployer address
+3. THE SamargaloToken SHALL use OpenZeppelin ERC-20 library implementation
+4. THE SamargaloToken SHALL compile with Solidity version 0.8.20
+5. THE SamargaloToken SHALL emit Transfer events for all token movements
+6. THE SamargaloToken SHALL emit Approval events for all allowance changes
+7. THE SamargaloToken SHALL set token name to "Samargalo Custom Token"
+8. THE SamargaloToken SHALL set token symbol to "SCT"
 
 ### Requirement 2: Smart Contract Documentation and Optimization
 
@@ -43,8 +43,8 @@ This document specifies requirements for a full-stack ERC-20 token platform that
 
 #### Acceptance Criteria
 
-1. THE SabaToken SHALL include natspec documentation for all public functions
-2. THE SabaToken SHALL include natspec documentation for the constructor
+1. THE SamargaloToken SHALL include natspec documentation for all public functions
+2. THE SamargaloToken SHALL include natspec documentation for the constructor
 3. WHEN compiled, THE Smart_Contract_System SHALL enable Solidity optimizer with 200 runs
 4. THE Smart_Contract_System SHALL generate compilation artifacts including ABI and bytecode
 
@@ -54,7 +54,7 @@ This document specifies requirements for a full-stack ERC-20 token platform that
 
 #### Acceptance Criteria
 
-1. WHEN the Deployment_Script is executed, THE Deployment_Script SHALL deploy SabaToken to Sepolia network via Alchemy RPC
+1. WHEN the Deployment_Script is executed, THE Deployment_Script SHALL deploy SamargaloToken to Sepolia network via Alchemy RPC
 2. WHEN deployment completes, THE Deployment_Script SHALL output the deployer address
 3. WHEN deployment completes, THE Deployment_Script SHALL output the contract address
 4. WHEN deployment completes, THE Deployment_Script SHALL output the transaction hash
@@ -109,7 +109,7 @@ This document specifies requirements for a full-stack ERC-20 token platform that
 
 #### Acceptance Criteria
 
-1. THE Token_Info_Component SHALL display the token name "Saba Custom Token"
+1. THE Token_Info_Component SHALL display the token name "Samargalo Custom Token"
 2. THE Token_Info_Component SHALL display the token symbol "SCT"
 3. THE Token_Info_Component SHALL display the contract address
 4. THE Token_Info_Component SHALL display a description of the token
@@ -161,8 +161,8 @@ This document specifies requirements for a full-stack ERC-20 token platform that
 
 #### Acceptance Criteria
 
-1. THE Configuration_Manager SHALL provide a constants file with the deployed SabaToken contract address
-2. THE Configuration_Manager SHALL provide a constants file with the SabaToken ABI
+1. THE Configuration_Manager SHALL provide a constants file with the deployed SamargaloToken contract address
+2. THE Configuration_Manager SHALL provide a constants file with the SamargaloToken ABI
 3. THE Configuration_Manager SHALL provide a constants file with Sepolia network chain ID
 4. THE Configuration_Manager SHALL provide a constants file with Etherscan base URL for Sepolia
 5. THE Configuration_Manager SHALL export contract address as a typed constant

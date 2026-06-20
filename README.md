@@ -1,4 +1,4 @@
-# Saba Token Platform
+# Samargalo Token Platform
 
 Full-stack ERC-20 token platform with Hardhat smart contract deployment and Next.js frontend.
 
@@ -8,7 +8,7 @@ Full-stack ERC-20 token platform with Hardhat smart contract deployment and Next
 ERC20Token/
 ├── contracts/          # Hardhat smart contracts
 │   ├── contracts/
-│   │   └── SabaToken.sol
+│   │   └── SamargaloToken.sol
 │   ├── scripts/
 │   │   └── deploy.js
 │   ├── hardhat.config.js
@@ -78,13 +78,32 @@ npm run dev
 
 3. Open http://localhost:3000 in your browser
 
+## How to Earn Tokens
+
+### Crypto Quiz 🎓
+- Answer 5 easy questions about cryptocurrency
+- Get at least 3 correct answers to pass
+- Earn **1 SCT token** for passing the quiz
+- Connect your wallet to participate
+
+### Tic Tac Toe Game 🎮
+- Play against the computer
+- Beat the AI to win
+- Earn **2 SCT tokens** for each win
+- Connect your wallet to claim rewards
+
+Both features are always visible on the main page and require a connected wallet to participate.
+
 ## Features
 
-✅ ERC-20 token (SabaToken - SCT)
+✅ ERC-20 token (SamargaloToken - SCT)
 ✅ 14 token supply
 ✅ MetaMask wallet connection
 ✅ Real-time balance display
 ✅ Token information with Etherscan links
+✅ **Interactive Crypto Quiz** - Test your knowledge and earn 1 SCT token
+✅ **Tic Tac Toe Game** - Beat the computer to earn 2 SCT tokens
+✅ Token rewards system for quiz completion and game wins
 ✅ Responsive design (mobile + desktop)
 ✅ Sepolia testnet deployment
 
@@ -113,7 +132,7 @@ npm run start    # Start production server
 
 ## Contract Details
 
-- **Name**: Saba Custom Token
+- **Name**: Samargalo Custom Token
 - **Symbol**: SCT
 - **Decimals**: 18
 - **Total Supply**: 14 SCT
