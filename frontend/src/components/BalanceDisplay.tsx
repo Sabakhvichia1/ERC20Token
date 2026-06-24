@@ -44,7 +44,7 @@ export function BalanceDisplay() {
         
         // Animate number counting up
         const difference = totalBalance - prevDisplayBalance
-        const duration = 1000 // 1 second
+        const duration = 1000
         const steps = 30
         const increment = difference / steps
         const stepDuration = duration / steps
@@ -85,15 +85,15 @@ export function BalanceDisplay() {
   if (!isConnected) {
     return (
       <div className="glass-card relative gradient-border-top">
-        <h2 className="text-3xl font-bold mb-8 text-brand-orange">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 gradient-text tracking-[-0.02em]">
           Your Balance
         </h2>
-        <p className="text-5xl md:text-6xl font-bold text-gray-500/30 mb-6">0.00 {TOKEN_SYMBOL}</p>
-        <p className="text-sm text-muted mb-8">Connect wallet to view balance</p>
+        <p className="font-heading text-4xl md:text-5xl font-bold text-white/10 mb-6 tracking-[-0.02em]">0.00 {TOKEN_SYMBOL}</p>
+        <p className="text-sm text-[var(--text-muted)] mb-8">Connect wallet to view balance</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             disabled
-            className="px-6 py-3 bg-gray-600/20 border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-semibold flex items-center justify-center gap-2"
+            className="px-6 py-3.5 bg-white/5 border border-white/10 text-[var(--text-muted)] rounded-xl cursor-not-allowed font-semibold flex items-center justify-center gap-2 font-heading text-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -102,7 +102,7 @@ export function BalanceDisplay() {
           </button>
           <button
             disabled
-            className="px-6 py-3 bg-gray-600/20 border border-gray-500/30 text-gray-500 rounded-lg cursor-not-allowed font-semibold flex items-center justify-center gap-2"
+            className="px-6 py-3.5 bg-white/5 border border-white/10 text-[var(--text-muted)] rounded-xl cursor-not-allowed font-semibold flex items-center justify-center gap-2 font-heading text-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m0 0l-4-4m4 4l4-4" />
@@ -117,11 +117,11 @@ export function BalanceDisplay() {
   if (SAMARGALO_TOKEN_ADDRESS === '0x0000000000000000000000000000000000000000') {
     return (
       <div className="glass-card relative gradient-border-top">
-        <h2 className="text-3xl font-bold mb-8 text-brand-orange">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 gradient-text tracking-[-0.02em]">
           Your Balance
         </h2>
-        <p className="text-orange-red mb-2">⚠️ Contract not configured</p>
-        <p className="text-sm text-secondary">Please set contract address in .env.local</p>
+        <p className="text-[var(--error)] mb-2">⚠️ Contract not configured</p>
+        <p className="text-sm text-[var(--text-secondary)]">Please set contract address in .env.local</p>
       </div>
     )
   }
@@ -129,12 +129,16 @@ export function BalanceDisplay() {
   if (isLoading) {
     return (
       <div className="glass-card relative gradient-border-top">
-        <h2 className="text-3xl font-bold mb-8 text-brand-orange">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 gradient-text tracking-[-0.02em]">
           Your Balance
         </h2>
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-8 h-8 border-3 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-lg text-secondary">Loading balance...</p>
+        <div className="space-y-4 mb-8">
+          <div className="skeleton h-12 w-3/4"></div>
+          <div className="skeleton h-4 w-1/3"></div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="skeleton h-12 rounded-xl"></div>
+          <div className="skeleton h-12 rounded-xl"></div>
         </div>
       </div>
     )
@@ -143,14 +147,14 @@ export function BalanceDisplay() {
   if (isError) {
     return (
       <div className="glass-card relative gradient-border-top">
-        <h2 className="text-3xl font-bold mb-8 text-brand-orange">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 gradient-text tracking-[-0.02em]">
           Your Balance
         </h2>
-        <p className="text-orange-red mb-2">Failed to load balance</p>
-        <p className="text-sm text-secondary mb-4">Check your connection and network</p>
+        <p className="text-[var(--error)] mb-2">Failed to load balance</p>
+        <p className="text-sm text-[var(--text-secondary)] mb-6">Check your connection and network</p>
         <button
           onClick={() => refetch()}
-          className="btn-primary"
+          className="btn-primary font-heading text-sm"
         >
           Retry
         </button>
@@ -161,31 +165,33 @@ export function BalanceDisplay() {
   return (
     <>
       <div className="glass-card relative gradient-border-top">
-        <h2 className="text-3xl font-bold mb-8 text-brand-orange">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 gradient-text tracking-[-0.02em]">
           Your Balance
         </h2>
         
         <div className="mb-8">
-          <div className={`transition-all duration-300 ${isAnimating ? 'scale-110' : 'scale-100'}`}>
-            <p className={`text-5xl md:text-6xl font-bold gradient-text mb-3 ${isAnimating ? 'animate-glow' : ''}`}>
+          <div className={`transition-all duration-300 ${isAnimating ? 'scale-105' : 'scale-100'}`}>
+            <p className={`font-heading text-4xl md:text-5xl lg:text-6xl font-bold gradient-text-orange mb-3 tracking-[-0.02em] ${isAnimating ? 'animate-glow-pulse' : ''}`}>
               {displayBalance} {TOKEN_SYMBOL}
             </p>
             {isAnimating && prevDisplayBalance > 0 && (
-              <div className="inline-block animate-bounce text-2xl">
-                ✨ +{(parseFloat(displayBalance.replace(/,/g, '')) - prevDisplayBalance).toFixed(2)} SCT!
+              <div className="inline-block animate-bounce text-xl font-heading">
+                <span className="text-[var(--success)]">
+                  ✨ +{(parseFloat(displayBalance.replace(/,/g, '')) - prevDisplayBalance).toFixed(2)} SCT!
+                </span>
               </div>
             )}
           </div>
           
-          <div className="flex items-center gap-2 text-sm">
-            <span className="status-live text-muted">Blockchain + Game Rewards</span>
+          <div className="flex items-center gap-2 text-sm mt-2">
+            <span className="status-live text-[var(--text-muted)]">Blockchain + Game Rewards</span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="btn-primary flex items-center justify-center gap-2"
+            className="btn-primary flex items-center justify-center gap-2 font-heading text-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -194,7 +200,7 @@ export function BalanceDisplay() {
           </button>
           
           <button
-            className="btn-secondary flex items-center justify-center gap-2"
+            className="btn-secondary flex items-center justify-center gap-2 font-heading text-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m0 0l-4-4m4 4l4-4" />

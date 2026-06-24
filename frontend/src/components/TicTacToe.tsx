@@ -17,8 +17,9 @@ export function TicTacToe() {
   const [winner, setWinner] = useState<Player | 'Draw' | null>(null)
   const [winningLine, setWinningLine] = useState<number[]>([])
   const [showTokenAnimation, setShowTokenAnimation] = useState(false)
+  const [hasClaimedThisAttempt, setHasClaimedThisAttempt] = useState(false)
   
-  const { addTokens, hasClaimedGame, setHasClaimedGame } = useTokenBalance()
+  const { addTokens, gameClaims, incrementGameClaims } = useTokenBalance()
 
   const checkWinner = (currentBoard: Board): { winner: Player | 'Draw' | null; line: number[] } => {
     const lines = [
@@ -119,20 +120,21 @@ export function TicTacToe() {
     setWinner(null)
     setWinningLine([])
     setShowTokenAnimation(false)
+    setHasClaimedThisAttempt(false)
   }
 
   const claimReward = () => {
-    // Add tokens to website balance
     addTokens(parseFloat(REWARD_AMOUNT))
-    setHasClaimedGame(true)
+    incrementGameClaims()
+    setHasClaimedThisAttempt(true)
     setShowTokenAnimation(true)
   }
 
   if (!isConnected) {
     return (
       <div className="card">
-        <h3 className="text-2xl font-bold mb-4">🎮 Tic Tac Toe</h3>
-        <p className="text-secondary">Connect your wallet to play and earn rewards!</p>
+        <h3 className="font-heading text-xl md:text-2xl font-bold mb-4 tracking-[-0.01em]">🎮 Tic Tac Toe</h3>
+        <p className="text-[var(--text-secondary)] leading-relaxed">Connect your wallet to play and earn rewards!</p>
       </div>
     )
   }
@@ -146,38 +148,56 @@ export function TicTacToe() {
       />
       
       <div className="card">
-        <h3 className="text-2xl font-bold mb-4">🎮 Tic Tac Toe</h3>
+        <h3 className="font-heading text-xl md:text-2xl font-bold mb-6 tracking-[-0.01em]">🎮 Tic Tac Toe</h3>
         
         <div className="text-center mb-6">
           {!winner && (
-            <p className="text-lg text-secondary">
+            <p className="text-lg text-[var(--text-secondary)] font-heading">
               {isPlayerTurn ? "Your turn (X)" : "Computer thinking... (O)"}
             </p>
           )}
           
           {winner && (
             <div className="space-y-4">
-              <p className="text-2xl font-bold gradient-text">
+              <p className="font-heading text-2xl font-bold gradient-text tracking-[-0.02em]">
                 {winner === 'X' ? '🎉 You Won!' : winner === 'O' ? '😢 Computer Won!' : '🤝 Draw!'}
               </p>
               
-              {winner === 'X' && !hasClaimedGame && (
+              {winner === 'X' && gameClaims < 5 && !hasClaimedThisAttempt && (
                 <div className="space-y-3">
-                  <p className="text-secondary">
-                    You've earned <span className="font-bold text-white">{REWARD_AMOUNT} SCT</span>!
+                  <p className="text-[var(--text-secondary)]">
+                    You&apos;ve earned <span className="font-bold text-white">{REWARD_AMOUNT} SCT</span>! ({gameClaims}/5 claims used)
                   </p>
                   <button
                     onClick={claimReward}
-                    className="btn-primary w-full"
+                    className="btn-primary w-full font-heading"
                   >
                     🎁 Claim Reward
                   </button>
                 </div>
               )}
 
-              {hasClaimedGame && (
-                <div className="p-4 rounded-lg bg-success/10 border border-success">
-                  <p className="text-success font-medium">✅ Reward claimed successfully!</p>
+              {hasClaimedThisAttempt && (
+                <div
+                  className="p-4 rounded-xl"
+                  style={{
+                    background: 'rgba(16, 185, 129, 0.08)',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                  }}
+                >
+                  <p className="text-[var(--success)] font-medium font-heading text-sm">✅ Reward claimed successfully! ({gameClaims}/5 total claimed)</p>
+                </div>
+              )}
+
+              {winner === 'X' && gameClaims >= 5 && !hasClaimedThisAttempt && (
+                <div
+                  className="p-4 rounded-xl"
+                  style={{
+                    background: 'rgba(124, 58, 237, 0.08)',
+                    border: '1px solid rgba(124, 58, 237, 0.3)',
+                  }}
+                >
+                  <p className="text-[var(--text-secondary)] font-medium font-heading text-sm">You have claimed the maximum amount of game rewards (5/5).</p>
                 </div>
               )}
             </div>
@@ -187,19 +207,46 @@ export function TicTacToe() {
         <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto mb-6">
           {board.map((cell, index) => {
             const isWinningCell = winningLine.includes(index)
+            
+            let cellStyle: React.CSSProperties = {
+              background: 'rgba(255, 255, 255, 0.03)',
+              borderColor: 'rgba(255, 255, 255, 0.08)',
+            }
+
+            if (cell === 'X') {
+              cellStyle = {
+                background: 'rgba(6, 182, 212, 0.08)',
+                borderColor: 'rgba(6, 182, 212, 0.4)',
+                color: 'var(--accent-cyan)',
+              }
+            } else if (cell === 'O') {
+              cellStyle = {
+                background: 'rgba(124, 58, 237, 0.08)',
+                borderColor: 'rgba(124, 58, 237, 0.4)',
+                color: 'var(--accent-purple)',
+              }
+            }
+
+            if (isWinningCell) {
+              cellStyle = {
+                ...cellStyle,
+                boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)',
+                borderColor: 'rgba(16, 185, 129, 0.6)',
+              }
+            }
+
             return (
               <button
                 key={index}
                 onClick={() => handleClick(index)}
                 disabled={!isPlayerTurn || !!cell || !!winner}
                 className={`
-                  aspect-square text-4xl font-bold rounded-lg border-2 transition-all
-                  ${cell === 'X' ? 'text-primary border-primary bg-primary/10' : ''}
-                  ${cell === 'O' ? 'text-accent border-accent bg-accent/10' : ''}
-                  ${!cell ? 'border-surface-dark hover:border-primary/50 hover:bg-primary/5' : ''}
-                  ${isWinningCell ? 'ring-4 ring-success animate-pulse' : ''}
+                  aspect-square text-3xl md:text-4xl font-bold rounded-xl border-2 transition-all duration-300 font-heading
+                  ${!cell && !winner && isPlayerTurn ? 'hover:border-accent-cyan/50 hover:bg-accent-cyan/5 hover:scale-105' : ''}
+                  ${isWinningCell ? 'animate-pulse' : ''}
                   disabled:cursor-not-allowed
                 `}
+                style={cellStyle}
               >
                 {cell}
               </button>
@@ -207,12 +254,18 @@ export function TicTacToe() {
           })}
         </div>
 
-        <button onClick={resetGame} className="btn-secondary w-full">
+        <button onClick={resetGame} className="btn-secondary w-full font-heading">
           🔄 New Game
         </button>
 
-        <div className="mt-4 p-3 rounded-lg bg-primary/5 border border-primary/20">
-          <p className="text-sm text-secondary text-center">
+        <div
+          className="mt-5 p-4 rounded-xl"
+          style={{
+            background: 'rgba(124, 58, 237, 0.06)',
+            border: '1px solid rgba(124, 58, 237, 0.15)',
+          }}
+        >
+          <p className="text-sm text-[var(--text-secondary)] text-center">
             💡 Beat the computer to earn {REWARD_AMOUNT} SCT tokens!
           </p>
         </div>

@@ -68,8 +68,9 @@ export function CryptoQuiz() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [isAnswered, setIsAnswered] = useState(false)
   const [showTokenAnimation, setShowTokenAnimation] = useState(false)
+  const [hasClaimedThisAttempt, setHasClaimedThisAttempt] = useState(false)
   
-  const { addTokens, hasClaimedQuiz, setHasClaimedQuiz } = useTokenBalance()
+  const { addTokens, quizClaims, incrementQuizClaims } = useTokenBalance()
 
   const handleAnswer = (answerIndex: number) => {
     if (isAnswered) return
@@ -94,9 +95,9 @@ export function CryptoQuiz() {
   }
 
   const claimReward = () => {
-    // Add tokens to website balance
     addTokens(parseFloat(REWARD_AMOUNT))
-    setHasClaimedQuiz(true)
+    incrementQuizClaims()
+    setHasClaimedThisAttempt(true)
     setShowTokenAnimation(true)
   }
 
@@ -107,6 +108,7 @@ export function CryptoQuiz() {
     setSelectedAnswer(null)
     setIsAnswered(false)
     setShowTokenAnimation(false)
+    setHasClaimedThisAttempt(false)
   }
 
   const isPassed = score >= 3
@@ -114,8 +116,8 @@ export function CryptoQuiz() {
   if (!isConnected) {
     return (
       <div className="card">
-        <h3 className="text-2xl font-bold mb-4">🎓 Crypto Quiz</h3>
-        <p className="text-secondary">Connect your wallet to take the quiz and earn rewards!</p>
+        <h3 className="font-heading text-xl md:text-2xl font-bold mb-4 tracking-[-0.01em]">🎓 Crypto Quiz</h3>
+        <p className="text-[var(--text-secondary)] leading-relaxed">Connect your wallet to take the quiz and earn rewards!</p>
       </div>
     )
   }
@@ -130,36 +132,54 @@ export function CryptoQuiz() {
         />
         
         <div className="card">
-          <h3 className="text-2xl font-bold mb-4">🎓 Quiz Complete!</h3>
+          <h3 className="font-heading text-xl md:text-2xl font-bold mb-6 tracking-[-0.01em]">🎓 Quiz Complete!</h3>
           <div className="text-center space-y-6">
-            <div className="text-4xl font-bold gradient-text">
+            <div className="font-heading text-4xl font-bold gradient-text tracking-[-0.02em]">
               {score} / {QUIZ_QUESTIONS.length}
             </div>
-            <p className="text-lg text-secondary">
+            <p className="text-lg text-[var(--text-secondary)]">
               {isPassed ? "🎉 Congratulations! You passed!" : "😢 Better luck next time!"}
             </p>
 
-            {isPassed && !hasClaimedQuiz && (
+            {isPassed && quizClaims < 5 && !hasClaimedThisAttempt && (
               <div className="space-y-4">
-                <p className="text-secondary">
-                  You've earned a reward of <span className="font-bold text-white">{REWARD_AMOUNT} SCT</span>!
+                <p className="text-[var(--text-secondary)]">
+                  You&apos;ve earned a reward of <span className="font-bold text-white">{REWARD_AMOUNT} SCT</span>! ({quizClaims}/5 claims used)
                 </p>
                 <button
                   onClick={claimReward}
-                  className="btn-primary w-full"
+                  className="btn-primary w-full font-heading"
                 >
                   🎁 Claim Reward
                 </button>
               </div>
             )}
 
-            {hasClaimedQuiz && (
-              <div className="p-4 rounded-lg bg-success/10 border border-success">
-                <p className="text-success font-medium">✅ Reward claimed successfully!</p>
+            {hasClaimedThisAttempt && (
+              <div
+                className="p-4 rounded-xl"
+                style={{
+                  background: 'rgba(16, 185, 129, 0.08)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                }}
+              >
+                <p className="text-[var(--success)] font-medium font-heading text-sm">✅ Reward claimed successfully! ({quizClaims}/5 total claimed)</p>
               </div>
             )}
 
-            <button onClick={resetQuiz} className="btn-secondary w-full">
+            {quizClaims >= 5 && !hasClaimedThisAttempt && (
+              <div
+                className="p-4 rounded-xl"
+                style={{
+                  background: 'rgba(124, 58, 237, 0.08)',
+                  border: '1px solid rgba(124, 58, 237, 0.3)',
+                }}
+              >
+                <p className="text-[var(--text-secondary)] font-medium font-heading text-sm">You have claimed the maximum amount of quiz rewards (5/5).</p>
+              </div>
+            )}
+
+            <button onClick={resetQuiz} className="btn-secondary w-full font-heading">
               🔄 Try Again
             </button>
           </div>
@@ -180,15 +200,21 @@ export function CryptoQuiz() {
       
       <div className="card">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-bold">🎓 Crypto Quiz</h3>
-          <span className="text-sm text-secondary">
+          <h3 className="font-heading text-xl md:text-2xl font-bold tracking-[-0.01em]">🎓 Crypto Quiz</h3>
+          <span className="text-sm text-[var(--text-secondary)] font-heading">
             Question {currentQuestion + 1} / {QUIZ_QUESTIONS.length}
           </span>
         </div>
 
         <div className="space-y-6">
-          <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
-            <p className="text-lg font-medium">{question.question}</p>
+          <div
+            className="p-5 rounded-xl"
+            style={{
+              background: 'rgba(124, 58, 237, 0.06)',
+              border: '1px solid rgba(124, 58, 237, 0.15)',
+            }}
+          >
+            <p className="text-lg font-medium leading-relaxed">{question.question}</p>
           </div>
 
           <div className="space-y-3">
@@ -196,14 +222,31 @@ export function CryptoQuiz() {
               const isCorrect = index === question.correctAnswer
               const isSelected = selectedAnswer === index
               
-              let buttonClass = 'btn-secondary w-full text-left justify-start'
+              let buttonStyle: React.CSSProperties = {
+                background: 'transparent',
+                borderColor: 'rgba(255, 140, 66, 0.3)',
+                color: 'var(--accent-orange)',
+              }
+              
               if (isAnswered) {
                 if (isSelected && isCorrect) {
-                  buttonClass = 'w-full text-left justify-start bg-success/20 border-success text-success'
+                  buttonStyle = {
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    borderColor: 'rgba(16, 185, 129, 0.5)',
+                    color: 'var(--success)',
+                  }
                 } else if (isSelected && !isCorrect) {
-                  buttonClass = 'w-full text-left justify-start bg-error/20 border-error text-error'
+                  buttonStyle = {
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    borderColor: 'rgba(239, 68, 68, 0.5)',
+                    color: 'var(--error)',
+                  }
                 } else if (isCorrect) {
-                  buttonClass = 'w-full text-left justify-start bg-success/20 border-success text-success'
+                  buttonStyle = {
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    borderColor: 'rgba(16, 185, 129, 0.5)',
+                    color: 'var(--success)',
+                  }
                 }
               }
 
@@ -212,7 +255,8 @@ export function CryptoQuiz() {
                   key={index}
                   onClick={() => handleAnswer(index)}
                   disabled={isAnswered}
-                  className={buttonClass}
+                  className="w-full text-left py-3.5 px-5 rounded-xl border-2 font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg disabled:hover:scale-100 disabled:hover:shadow-none font-heading text-sm"
+                  style={buttonStyle}
                 >
                   {option}
                   {isAnswered && isCorrect && ' ✓'}
@@ -222,17 +266,19 @@ export function CryptoQuiz() {
             })}
           </div>
 
+          {/* Progress bar */}
           <div className="flex gap-2 pt-4">
             {Array.from({ length: QUIZ_QUESTIONS.length }).map((_, idx) => (
               <div
                 key={idx}
-                className={`h-2 flex-1 rounded-full ${
-                  idx < currentQuestion
-                    ? 'bg-primary'
+                className="h-1.5 flex-1 rounded-full transition-all duration-500"
+                style={{
+                  background: idx < currentQuestion
+                    ? 'var(--gradient-primary)'
                     : idx === currentQuestion
-                    ? 'bg-primary/50'
-                    : 'bg-surface-dark'
-                }`}
+                    ? 'rgba(124, 58, 237, 0.4)'
+                    : 'rgba(255, 255, 255, 0.08)',
+                }}
               />
             ))}
           </div>

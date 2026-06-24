@@ -5,28 +5,36 @@ import { createContext, useContext, useState, useCallback, ReactNode, useEffect 
 interface TokenBalanceContextType {
   websiteBalance: number
   addTokens: (amount: number) => void
-  hasClaimedQuiz: boolean
-  hasClaimedGame: boolean
-  setHasClaimedQuiz: (claimed: boolean) => void
-  setHasClaimedGame: (claimed: boolean) => void
+  quizClaims: number
+  gameClaims: number
+  incrementQuizClaims: () => void
+  incrementGameClaims: () => void
 }
 
 const TokenBalanceContext = createContext<TokenBalanceContextType | undefined>(undefined)
 
 export function TokenBalanceProvider({ children }: { children: ReactNode }) {
   const [websiteBalance, setWebsiteBalance] = useState(0)
-  const [hasClaimedQuiz, setHasClaimedQuiz] = useState(false)
-  const [hasClaimedGame, setHasClaimedGame] = useState(false)
+  const [quizClaims, setQuizClaims] = useState(0)
+  const [gameClaims, setGameClaims] = useState(0)
 
   // Load from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem('sct_website_balance')
-    const savedQuiz = localStorage.getItem('sct_claimed_quiz')
-    const savedGame = localStorage.getItem('sct_claimed_game')
+    const savedQuiz = localStorage.getItem('sct_quiz_claims')
+    const savedGame = localStorage.getItem('sct_game_claims')
+    
+    // Handle old boolean format gracefully
+    const oldSavedQuiz = localStorage.getItem('sct_claimed_quiz')
+    const oldSavedGame = localStorage.getItem('sct_claimed_game')
     
     if (saved) setWebsiteBalance(parseFloat(saved))
-    if (savedQuiz) setHasClaimedQuiz(savedQuiz === 'true')
-    if (savedGame) setHasClaimedGame(savedGame === 'true')
+    
+    if (savedQuiz) setQuizClaims(parseInt(savedQuiz, 10))
+    else if (oldSavedQuiz === 'true') setQuizClaims(1)
+    
+    if (savedGame) setGameClaims(parseInt(savedGame, 10))
+    else if (oldSavedGame === 'true') setGameClaims(1)
   }, [])
 
   const addTokens = useCallback((amount: number) => {
@@ -37,24 +45,30 @@ export function TokenBalanceProvider({ children }: { children: ReactNode }) {
     })
   }, [])
 
-  const setQuizClaimed = useCallback((claimed: boolean) => {
-    setHasClaimedQuiz(claimed)
-    localStorage.setItem('sct_claimed_quiz', claimed.toString())
+  const incrementQuizClaims = useCallback(() => {
+    setQuizClaims(prev => {
+      const newCount = prev + 1
+      localStorage.setItem('sct_quiz_claims', newCount.toString())
+      return newCount
+    })
   }, [])
 
-  const setGameClaimed = useCallback((claimed: boolean) => {
-    setHasClaimedGame(claimed)
-    localStorage.setItem('sct_claimed_game', claimed.toString())
+  const incrementGameClaims = useCallback(() => {
+    setGameClaims(prev => {
+      const newCount = prev + 1
+      localStorage.setItem('sct_game_claims', newCount.toString())
+      return newCount
+    })
   }, [])
 
   return (
     <TokenBalanceContext.Provider value={{ 
       websiteBalance, 
       addTokens, 
-      hasClaimedQuiz,
-      hasClaimedGame,
-      setHasClaimedQuiz: setQuizClaimed,
-      setHasClaimedGame: setGameClaimed
+      quizClaims,
+      gameClaims,
+      incrementQuizClaims,
+      incrementGameClaims
     }}>
       {children}
     </TokenBalanceContext.Provider>

@@ -5,120 +5,156 @@ import { CryptoQuiz } from '@/components/CryptoQuiz'
 import { TicTacToe } from '@/components/TicTacToe'
 import { NetworkWarning } from '@/components/NetworkWarning'
 import { EthBalanceWarning } from '@/components/EthBalanceWarning'
+import { AnimatedPage } from '@/components/AnimatedPage'
 import { Volume2, MonitorPlay, Globe } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="min-h-screen text-white bg-transparent font-sans">
-      <Header />
-      
-      <main className="container mx-auto px-6 pt-16 md:pt-24 pb-24">
-        {/* Hero Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 max-w-7xl mx-auto mb-24">
-          <div className="flex-1 animate-fadeInUp">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
-              Distribute and manage your Samargalo Custom Tokens on Web3.
-            </h1>
-            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-xl leading-relaxed drop-shadow">
-              Samargalo puts your tokens on the most popular decentralized networks worldwide. That's more flexibility and security than any other token manager.
-            </p>
-            <button className="bg-brand-orange hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(233,82,33,0.5)] text-lg">
-              Connect Wallet
-            </button>
-          </div>
-          
-          <div className="flex-1 flex justify-center animate-fadeInUp delay-100">
-            <div className="relative w-72 h-72 md:w-[400px] md:h-[400px]">
-              {/* Simulated Illustration - Record / Token */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-orange/40 to-black shadow-[0_0_50px_rgba(233,82,33,0.3)] border-4 border-brand-orange/50 flex items-center justify-center animate-spin" style={{ animationDuration: '15s' }}>
-                <div className="w-1/3 h-1/3 rounded-full bg-brand-orange/30 border-2 border-brand-orange flex items-center justify-center backdrop-blur-md">
-                   <div className="w-6 h-6 rounded-full bg-white shadow-[0_0_15px_white]"></div>
-                </div>
+    <AnimatedPage>
+      <div className="min-h-screen text-white bg-transparent">
+        <Header />
+        
+        <main className="container mx-auto px-6 lg:px-8">
+          {/* ── Hero Section ─────────────────────────────────── */}
+          <section className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-16 max-w-7xl mx-auto pt-[120px] pb-[80px] section-glow">
+            <div className="flex-1 max-w-2xl">
+              <h1
+                data-animate="hero-heading"
+                className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-[-0.02em]"
+              >
+                Distribute and manage your Samargalo Custom Tokens on Web3.
+              </h1>
+              <p
+                data-animate="hero-subtitle"
+                className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-xl leading-[1.7] tracking-[0.005em]"
+              >
+                Samargalo puts your tokens on the most popular decentralized networks worldwide. That&apos;s more flexibility and security than any other token manager.
+              </p>
+              <div data-animate="hero-cta">
+                <button className="btn-wallet-connect" id="hero-connect-wallet">
+                  Connect Wallet
+                </button>
               </div>
-              {/* decorative dots */}
-              <div className="absolute -z-10 -right-12 -bottom-12 w-48 h-48 opacity-50" style={{ backgroundImage: 'radial-gradient(#F39C12 3px, transparent 3px)', backgroundSize: '16px 16px' }}></div>
             </div>
-          </div>
-        </div>
-
-        {/* Glassy Features Section */}
-        <div className="glass-card mb-24 max-w-7xl mx-auto backdrop-blur-xl bg-black/20 border-brand-orange/30 shadow-[0_8px_32px_rgba(233,82,33,0.15)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
             
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-brand-orange/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(233,82,33,0.4)]">
-                <Volume2 className="w-10 h-10 text-brand-yellow" />
+            <div className="flex-1 flex justify-center" data-animate="hero-ring-outer">
+              <div className="relative w-72 h-72 md:w-[400px] md:h-[400px]">
+                {/* Token ring illustration */}
+                <div
+                  className="absolute inset-0 rounded-full border-2 border-accent-purple/30 gpu-accelerated"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(124,58,237,0.1) 0%, rgba(255,140,66,0.05) 50%, transparent 70%)',
+                    boxShadow: '0 0 60px rgba(124,58,237,0.15), inset 0 0 40px rgba(124,58,237,0.08)',
+                    animation: 'spin 20s linear infinite',
+                  }}
+                >
+                  <div
+                    data-animate="hero-ring-inner"
+                    className="absolute inset-[25%] rounded-full border border-accent-orange/40 flex items-center justify-center backdrop-blur-sm gpu-accelerated"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(255,140,66,0.15) 0%, transparent 70%)',
+                      boxShadow: '0 0 30px rgba(255,140,66,0.2)',
+                      animation: 'spin 12s linear infinite reverse',
+                    }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.8),0_0_40px_rgba(124,58,237,0.4)]"></div>
+                  </div>
+                </div>
+                {/* Decorative glow dots */}
+                <div className="absolute -right-8 -bottom-8 w-40 h-40 opacity-30" style={{ backgroundImage: 'radial-gradient(rgba(124,58,237,0.5) 2px, transparent 2px)', backgroundSize: '16px 16px' }}></div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 drop-shadow">Your tokens everywhere</h3>
-              <p className="text-gray-300 text-base leading-relaxed">
-                Relax. Unlike some services, we don't charge you annually to keep your tokens online. There are no annual fees, ever. And whenever we add a new decentralized exchange, your tokens will be supported free of charge.
-              </p>
             </div>
+          </section>
 
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-brand-orange/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(233,82,33,0.4)]">
-                <MonitorPlay className="w-10 h-10 text-brand-yellow" />
+          {/* ── Features Section ─────────────────────────────── */}
+          <section className="mb-16 max-w-7xl mx-auto">
+            <div className="glass-card backdrop-blur-xl border-accent-purple/20 shadow-[0_8px_40px_rgba(124,58,237,0.08)]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 text-center py-4">
+                
+                <div className="flex flex-col items-center" data-animate="feature-card">
+                  <div className="icon-circle mb-6" data-animate="feature-icon">
+                    <Volume2 className="w-8 h-8 text-accent-orange" />
+                  </div>
+                  <h3 className="font-heading text-xl lg:text-2xl font-bold mb-4 tracking-[-0.01em]">Your tokens everywhere</h3>
+                  <p className="text-[var(--text-secondary)] text-[15px] leading-relaxed max-w-xs">
+                    Relax. Unlike some services, we don&apos;t charge you annually. There are no annual fees, ever. New decentralized exchanges are supported free of charge.
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-center" data-animate="feature-card">
+                  <div className="icon-circle mb-6" data-animate="feature-icon">
+                    <MonitorPlay className="w-8 h-8 text-accent-purple" />
+                  </div>
+                  <h3 className="font-heading text-xl lg:text-2xl font-bold mb-4 tracking-[-0.01em]">Collect all your rewards</h3>
+                  <p className="text-[var(--text-secondary)] text-[15px] leading-relaxed max-w-xs">
+                    Every transaction generates value. We help you collect staking and performance rewards from hundreds of Web3 sources worldwide.
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-center" data-animate="feature-card">
+                  <div className="icon-circle mb-6" data-animate="feature-icon">
+                    <Globe className="w-8 h-8 text-accent-cyan" />
+                  </div>
+                  <h3 className="font-heading text-xl lg:text-2xl font-bold mb-4 tracking-[-0.01em]">Monetize on Web3</h3>
+                  <p className="text-[var(--text-secondary)] text-[15px] leading-relaxed max-w-xs">
+                    Collect tokens every time a smart contract interacts with your wallet. Global DeFi administration helps collect rewards wherever your token is used.
+                  </p>
+                </div>
+
               </div>
-              <h3 className="text-2xl font-bold mb-4 drop-shadow">Collect all your rewards</h3>
-              <p className="text-gray-300 text-base leading-relaxed">
-                Every transaction generates value for you. We help you collect your staking and performance rewards, and collect from hundreds of other sources for Web3 interactions around the world.
-              </p>
             </div>
+          </section>
 
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-brand-orange/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(233,82,33,0.4)]">
-                <Globe className="w-10 h-10 text-brand-yellow" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 drop-shadow">Monetize on Web3</h3>
-              <p className="text-gray-300 text-base leading-relaxed">
-                Collect tokens every time a smart contract interacts with your wallet. Global DeFi administration helps you collect rewards wherever your token is used.
-              </p>
-            </div>
+          {/* ── Dashboard Section ────────────────────────────── */}
+          <section className="max-w-7xl mx-auto mt-16 mb-8" data-animate="reveal">
+            <NetworkWarning />
+            <EthBalanceWarning />
+          </section>
 
-          </div>
-        </div>
-
-        {/* Dashboard Section */}
-        <div className="max-w-7xl mx-auto mb-12">
-          <NetworkWarning />
-          <EthBalanceWarning />
-        </div>
-
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Token Dashboard</h2>
-          <p className="text-lg text-gray-300 drop-shadow">Manage your Samargalo Custom Tokens safely and securely</p>
-        </div>
-
-        {/* Grid layout for previous components */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto mb-24">
-          <div className="transform transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(233,82,33,0.3)]">
-             <TokenInfo />
-          </div>
-          <div className="transform transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(233,82,33,0.3)]">
-             <BalanceDisplay />
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto border-t border-brand-orange/30 pt-24">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              🎁 Earn Free Tokens
-            </h3>
-            <p className="text-lg text-gray-300 drop-shadow">
-              Complete the quiz or win at Tic Tac Toe to earn rewards!
+          <section className="text-center mb-12" data-animate="reveal">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4 tracking-[-0.02em]">
+              Token Dashboard
+            </h2>
+            <p className="text-lg text-[var(--text-secondary)] max-w-lg mx-auto">
+              Manage your Samargalo Custom Tokens safely and securely
             </p>
-          </div>
+            <div className="w-24 h-1 mx-auto mt-6 rounded-full" style={{ background: 'var(--gradient-primary)' }}></div>
+          </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="transform transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(233,82,33,0.3)]">
-              <CryptoQuiz />
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto mb-16">
+            <div data-animate="dash-card">
+              <TokenInfo />
             </div>
-            <div className="transform transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(233,82,33,0.3)]">
-              <TicTacToe />
+            <div data-animate="dash-card">
+              <BalanceDisplay />
             </div>
-          </div>
-        </div>
-      </main>
-    </div>
+          </section>
+
+          {/* ── Earn Section ──────────────────────────────────── */}
+          <section className="max-w-7xl mx-auto pt-16 mb-24" data-animate="reveal">
+            <div className="w-full h-px mb-16" style={{ background: 'linear-gradient(90deg, transparent, var(--accent-purple), var(--accent-orange), transparent)' }}></div>
+            
+            <div className="text-center mb-12">
+              <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4 tracking-[-0.02em]">
+                🎁 Earn Free Tokens
+              </h3>
+              <p className="text-lg text-[var(--text-secondary)] max-w-lg mx-auto">
+                Complete the quiz or win at Tic Tac Toe to earn rewards!
+              </p>
+              <div className="w-20 h-1 mx-auto mt-6 rounded-full" style={{ background: 'var(--gradient-primary)' }}></div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div data-animate="dash-card">
+                <CryptoQuiz />
+              </div>
+              <div data-animate="dash-card">
+                <TicTacToe />
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </AnimatedPage>
   )
 }
