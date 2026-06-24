@@ -1,4 +1,4 @@
-export const SAMARGALO_TOKEN_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || '0xcECeBe2ee52740FEb89a5FF3e6A782Ef903C11CE') as `0x${string}`
+export const SAMARGALO_TOKEN_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || '0x3D291f3bAcB66F89aeb01aaC59533C2A90f092a9') as `0x${string}`
 
 export const SAMARGALO_TOKEN_ABI = [
   {
