@@ -15,6 +15,6 @@ contract SamargaloToken is ERC20 {
      * Decimals: 18 (default)
      */
     constructor() ERC20("Samargalo Custom Token", "SCT") {
-        _mint(msg.sender, 14 * 10 ** decimals());
+        _mint(msg.sender, 100 * 10 ** decimals());
     }
 }

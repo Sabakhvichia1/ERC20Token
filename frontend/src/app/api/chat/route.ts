@@ -10,7 +10,7 @@ Here is the knowledge you have about the Samargalo Token:
 - **Token Name**: Samargalo Custom Token
 - **Token Symbol**: SCT
 - **Network**: Deployed on the Sepolia testnet (Ethereum)
-- **Total Supply**: A fixed supply of 14 tokens
+- **Total Supply**: A fixed supply of 100 tokens
 - **Smart Contract Security**: Built using OpenZeppelin's secure and audited smart contracts
 - **Fees**: There are no annual fees, ever. New decentralized exchanges are supported free of charge.
 - **Rewards**: Users can collect staking and performance rewards from hundreds of Web3 sources worldwide. Every time a smart contract interacts with a user's wallet, they can collect tokens.

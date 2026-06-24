@@ -91,8 +91,8 @@ export function TokenInfo() {
           <div>
             <p className="text-caption uppercase text-[var(--text-muted)] mb-2 font-medium tracking-wider">About</p>
             <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
-              A custom ERC-20 token deployed on the Sepolia testnet with a fixed supply of 14 tokens. 
-              Built using OpenZeppelin&apos;s secure and audited smart contracts.
+              A custom ERC-20 token deployed on the Sepolia testnet with a fixed supply of 100 tokens. 
+              Built with security in mind using OpenZeppelin&apos;s standard contracts.
             </p>
           </div>
         </div>
