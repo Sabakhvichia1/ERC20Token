@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { streamText } from 'ai';
 
 // Edge runtime is required for Cloudflare Pages
@@ -25,8 +25,13 @@ export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
 
+    // Explicitly initialize the Google provider with the API key so Cloudflare edge can find it
+    const googleProvider = createGoogleGenerativeAI({
+      apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+    });
+
     const result = await streamText({
-      model: google('gemini-2.5-flash'),
+      model: googleProvider('gemini-2.5-flash'),
       messages,
       system: systemPrompt,
     });
