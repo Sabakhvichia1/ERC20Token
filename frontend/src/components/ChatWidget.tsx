@@ -6,7 +6,7 @@ import { MessageSquare, X, Send, Bot, User } from 'lucide-react'
 
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat()
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll to bottom when messages change
@@ -67,7 +67,13 @@ export function ChatWidget() {
 
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.length === 0 && (
+            {error && (
+              <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm mb-4">
+                <strong>Error:</strong> {error.message}
+              </div>
+            )}
+            
+            {messages.length === 0 && !error && (
               <div className="text-center text-[var(--text-secondary)] py-8 px-4">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-accent-purple/10 border border-accent-purple/20">
                   <MessageSquare className="w-8 h-8 text-accent-purple" />
