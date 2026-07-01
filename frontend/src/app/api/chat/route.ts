@@ -1,9 +1,12 @@
 import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+// Edge runtime is required for Cloudflare Pages
+export const runtime = 'edge';
 
+// Note: maxDuration is a Vercel-specific setting, Cloudflare has its own timeout limits
+// but keeping it here won't hurt if you switch back to Vercel.
+export const maxDuration = 30;
 const systemPrompt = `You are the official AI Assistant for the Samargalo Custom Token (SCT). Your sole purpose is to provide helpful, concise, and accurate information about this specific token.
 
 Here is the knowledge you have about the Samargalo Token:
